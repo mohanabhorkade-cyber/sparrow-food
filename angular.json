@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sparrow-foods": {
+    "sparrow-food": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/sparrow-foods",
+            "outputPath": "dist/sparrow-food",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -86,10 +86,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sparrow-foods:build:production"
+              "buildTarget": "sparrow-food:build:production"
             },
             "development": {
-              "buildTarget": "sparrow-foods:build:development"
+              "buildTarget": "sparrow-food:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -97,7 +97,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/sparrow-foods/server",
+            "outputPath": "dist/sparrow-food/server",
             "main": "src/server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"

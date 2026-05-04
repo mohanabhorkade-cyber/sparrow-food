@@ -206,7 +206,7 @@ app.post('/api/email/send-price-list', async (req, res) => {
       subject: 'Sparrow Food Industries - Price List Request Received',
       html: `
         <h2>Hello!</h2>
-        <p>Thank you for requesting the Sparrow Foods price list.</p>
+        <p>Thank you for requesting the Sparrow Food price list.</p>
         <p>We have received your request and will follow up with the requested details shortly.</p>
         <p>If you have any immediate questions, please reply to this email or contact us directly.</p>
         <hr>
@@ -228,7 +228,7 @@ app.post('/api/email/send-price-list', async (req, res) => {
       html: `
         <h3>New Price List Request</h3>
         <p><strong>Email:</strong> ${validator.escape(sanitizedEmail)}</p>
-        <p>This user has requested the Sparrow Foods price list.</p>
+        <p>This user has requested the Sparrow Food price list.</p>
         <p><em>Timestamp: ${new Date().toISOString()}</em></p>
       `
     };

@@ -1,4 +1,4 @@
-# Sparrow Foods - Production Ready Business Website
+# Sparrow Food - Production Ready Business Website
 
 A full-stack Angular 19 (frontend) + Node.js/Express (backend) business website with production-grade security, monitoring, and deployment setup.
 
@@ -14,7 +14,7 @@ A full-stack Angular 19 (frontend) + Node.js/Express (backend) business website 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd sparrow-foods
+   cd sparrow-food
    ```
 
 2. **Install dependencies**
@@ -192,7 +192,7 @@ npm test -- --watch=false --browsers=ChromeHeadless
 ## 📁 Project Structure
 
 ```
-sparrow-foods/
+sparrow-food/
 ├── src/
 │   ├── app/
 │   │   ├── components/     # Angular components

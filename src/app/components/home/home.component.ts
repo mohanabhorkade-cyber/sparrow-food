@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // Set specific SEO for home page
     this.seoService.updateSeo({
-      title: 'Sparrow Foods - Premium Food Ingredients & Seasonings Supplier',
+      title: 'Sparrow Food - Premium Food Ingredients & Seasonings Supplier',
       description: 'Leading supplier of premium food ingredients, seasonings, and flavorings for food manufacturers. Quality products including spices, extracts, powders, and beverage ingredients.',
       keywords: 'food ingredients, seasonings, flavorings, spices, food manufacturing, culinary supplies, beverage ingredients, bakery additives, dairy ingredients',
       image: 'https://sparrowfood.com/assets/images/og-home.jpg',
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
       structuredData: {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: 'Sparrow Foods',
+        name: 'Sparrow Food',
         description: 'Premium food ingredients and seasonings supplier',
         url: 'https://sparrowfood.com',
         potentialAction: {

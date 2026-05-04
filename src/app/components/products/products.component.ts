@@ -1505,7 +1505,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.goHome();
         // Default products page SEO
         this.seoService.updateSeo({
-          title: 'Products - Sparrow Foods | Premium Food Ingredients & Seasonings',
+          title: 'Products - Sparrow Food | Premium Food Ingredients & Seasonings',
           description: 'Explore our comprehensive range of premium food ingredients, seasonings, and flavorings. Perfect for food manufacturers and culinary professionals.',
           keywords: 'food ingredients, seasonings, flavorings, spices, food manufacturing, beverage ingredients, bakery additives',
           canonicalUrl: 'https://sparrowfood.com/products',
@@ -1522,21 +1522,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   private updateSeoForProducts(group: string, subItem?: string): void {
     const groupTitles: { [key: string]: string } = {
-      'Seasoning': 'Seasonings - Sparrow Foods | Premium Food Seasonings',
-      'Dried Fruit & Vegetable Flakes': 'Dried Fruit & Vegetable Flakes - Sparrow Foods',
-      'Fruit & Vegetable Powders': 'Fruit & Vegetable Powders - Sparrow Foods',
-      'Tea,Coffee & Milk Premixes': 'Tea, Coffee & Milk Premixes - Sparrow Foods',
-      'Instant Drink Beverage Premixes': 'Instant Drink Beverage Premixes - Sparrow Foods',
-      'Mixes for Cocktail Beverages': 'Cocktail Beverage Mixes - Sparrow Foods',
-      'Powdered Salts': 'Powdered Salts - Sparrow Foods',
-      'Flavours (Liquid & Spray Dried Powder)': 'Flavors & Extracts - Sparrow Foods',
-      'Bakery Ingredients/Additives': 'Bakery Ingredients & Additives - Sparrow Foods',
-      'Confectionery Ingredients/Additives': 'Confectionery Ingredients & Additives - Sparrow Foods',
-      'Dairy Product Ingredients/Additives': 'Dairy Product Ingredients & Additives - Sparrow Foods',
-      'Beverage Ingredients/Additives - A.Carbonated Soft Drink (CSD)': 'Carbonated Soft Drink Ingredients - Sparrow Foods',
-      'Beverage Ingredients/Additives - B.Fruit Based Beverage': 'Fruit Based Beverage Ingredients - Sparrow Foods',
-      'Seasoning Ingredients/Additives': 'Seasoning Ingredients & Additives - Sparrow Foods',
-      'Food Colours': 'Food Colors - Sparrow Foods'
+      'Seasoning': 'Seasonings - Sparrow Food | Premium Food Seasonings',
+      'Dried Fruit & Vegetable Flakes': 'Dried Fruit & Vegetable Flakes - Sparrow Food',
+      'Fruit & Vegetable Powders': 'Fruit & Vegetable Powders - Sparrow Food',
+      'Tea,Coffee & Milk Premixes': 'Tea, Coffee & Milk Premixes - Sparrow Food',
+      'Instant Drink Beverage Premixes': 'Instant Drink Beverage Premixes - Sparrow Food',
+      'Mixes for Cocktail Beverages': 'Cocktail Beverage Mixes - Sparrow Food',
+      'Powdered Salts': 'Powdered Salts - Sparrow Food',
+      'Flavours (Liquid & Spray Dried Powder)': 'Flavors & Extracts - Sparrow Food',
+      'Bakery Ingredients/Additives': 'Bakery Ingredients & Additives - Sparrow Food',
+      'Confectionery Ingredients/Additives': 'Confectionery Ingredients & Additives - Sparrow Food',
+      'Dairy Product Ingredients/Additives': 'Dairy Product Ingredients & Additives - Sparrow Food',
+      'Beverage Ingredients/Additives - A.Carbonated Soft Drink (CSD)': 'Carbonated Soft Drink Ingredients - Sparrow Food',
+      'Beverage Ingredients/Additives - B.Fruit Based Beverage': 'Fruit Based Beverage Ingredients - Sparrow Food',
+      'Seasoning Ingredients/Additives': 'Seasoning Ingredients & Additives - Sparrow Food',
+      'Food Colours': 'Food Colors - Sparrow Food'
     };
 
     const groupDescriptions: { [key: string]: string } = {
@@ -1557,8 +1557,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
       'Food Colours': 'Food-grade colors for various food applications. Premium color solutions for food manufacturers.'
     };
 
-    let title = groupTitles[group] || 'Products - Sparrow Foods';
-    let description = groupDescriptions[group] || 'Premium food ingredients and seasonings from Sparrow Foods.';
+    let title = groupTitles[group] || 'Products - Sparrow Food';
+    let description = groupDescriptions[group] || 'Premium food ingredients and seasonings from Sparrow Food.';
     let keywords = 'food ingredients, seasonings, flavorings, food manufacturing';
     let canonicalUrl = `https://sparrowfood.com/products?group=${encodeURIComponent(group)}`;
     let breadcrumb: Array<{ name: string; url: string }> = [
@@ -1568,8 +1568,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ];
 
     if (subItem) {
-      title = `${subItem} - ${group} | Sparrow Foods`;
-      description = `Premium ${subItem} seasoning for ${group}. High-quality food ingredients from Sparrow Foods.`;
+      title = `${subItem} - ${group} | Sparrow Food`;
+      description = `Premium ${subItem} seasoning for ${group}. High-quality food ingredients from Sparrow Food.`;
       canonicalUrl += `&subItem=${encodeURIComponent(subItem)}`;
       breadcrumb.push({ name: subItem, url: canonicalUrl });
     }
@@ -1588,7 +1588,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         url: canonicalUrl,
         provider: {
           '@type': 'Organization',
-          name: 'Sparrow Foods'
+          name: 'Sparrow Food'
         }
       }
     });

@@ -1,4 +1,4 @@
-# Sparrow Foods Backend
+# Sparrow Food Backend
 
 Backend server for handling email functionality.
 

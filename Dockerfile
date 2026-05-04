@@ -26,7 +26,7 @@ FROM base AS production
 WORKDIR /app
 
 # Copy built Angular app
-COPY --from=builder /app/dist/sparrow-foods ./dist/sparrow-foods
+COPY --from=builder /app/dist/sparrow-food ./dist/sparrow-food
 
 # Copy backend
 COPY backend/package*.json ./backend/
@@ -51,4 +51,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD node -e "require('http').get('http://localhost:5000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
 # Start both frontend and backend
-CMD ["sh", "-c", "npm run serve:ssr:sparrow-foods & cd backend && npm start"]
+CMD ["sh", "-c", "npm run serve:ssr:sparrow-food & cd backend && npm start"]

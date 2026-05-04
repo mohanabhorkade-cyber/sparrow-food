@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.sparrowfood.com/api',
-  appName: 'Sparrow Foods',
+  apiUrl: 'https://sparrow-food-backend.onrender.com/api',
+  appName: 'Sparrow Food',
   version: '1.0.0',
-  sentryDsn: 'your-production-sentry-dsn-here' // Replace with actual Sentry DSN
+  sentryDsn: '' // Replace with actual Sentry DSN
 };

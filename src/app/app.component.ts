@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'sparrow-foods';
+  title = 'sparrow-food';
   currentBreadcrumbs: Array<{ label: string; url?: string; active?: boolean }> = [];
   private destroy$ = new Subject<void>();
 
@@ -26,13 +26,13 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Set default SEO data for the application
     this.seoService.updateSeo({
-      title: 'Sparrow Foods - Premium Food Ingredients & Seasonings',
+      title: 'Sparrow Food - Premium Food Ingredients & Seasonings',
       description: 'Leading supplier of premium food ingredients, seasonings, and flavorings. Quality products for food manufacturers and culinary professionals.',
       keywords: 'food ingredients, seasonings, flavorings, spices, food manufacturing, culinary supplies',
-      author: 'Sparrow Foods',
+      author: 'Sparrow Food',
       image: 'https://sparrowfood.com/assets/images/og-image.jpg',
       url: 'https://sparrowfood.com',
-      siteName: 'Sparrow Foods',
+      siteName: 'Sparrow Food',
       canonicalUrl: 'https://sparrowfood.com',
       structuredData: this.seoService.getOrganizationStructuredData()
     });
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const routeConfig: { [key: string]: { seo: Partial<import('./services/seo.service').SeoData>, breadcrumbs: Array<{ label: string; url?: string; active?: boolean }> } } = {
       '/': {
         seo: {
-          title: 'Sparrow Foods - Premium Food Ingredients & Seasonings',
+          title: 'Sparrow Food - Premium Food Ingredients & Seasonings',
           description: 'Leading supplier of premium food ingredients, seasonings, and flavorings. Quality products for food manufacturers and culinary professionals.',
           canonicalUrl: 'https://sparrowfood.com'
         },
@@ -69,8 +69,8 @@ export class AppComponent implements OnInit, OnDestroy {
       },
       '/about': {
         seo: {
-          title: 'About Us - Sparrow Foods | Premium Food Ingredients Supplier',
-          description: 'Learn about Sparrow Foods, your trusted partner for premium food ingredients and seasonings. Quality products and exceptional service since our founding.',
+          title: 'About Us - Sparrow Food | Premium Food Ingredients Supplier',
+          description: 'Learn about Sparrow Food, your trusted partner for premium food ingredients and seasonings. Quality products and exceptional service since our founding.',
           canonicalUrl: 'https://sparrowfood.com/about'
         },
         breadcrumbs: [
@@ -80,7 +80,7 @@ export class AppComponent implements OnInit, OnDestroy {
       },
       '/products': {
         seo: {
-          title: 'Products - Sparrow Foods | Food Ingredients & Seasonings',
+          title: 'Products - Sparrow Food | Food Ingredients & Seasonings',
           description: 'Explore our comprehensive range of premium food ingredients, seasonings, and flavorings. Perfect for food manufacturers and culinary professionals.',
           canonicalUrl: 'https://sparrowfood.com/products'
         },
@@ -91,8 +91,8 @@ export class AppComponent implements OnInit, OnDestroy {
       },
       '/contact': {
         seo: {
-          title: 'Contact Us - Sparrow Foods | Get In Touch',
-          description: 'Contact Sparrow Foods for premium food ingredients and seasonings. Get pricing, place orders, or ask questions about our products.',
+          title: 'Contact Us - Sparrow Food | Get In Touch',
+          description: 'Contact Sparrow Food for premium food ingredients and seasonings. Get pricing, place orders, or ask questions about our products.',
           canonicalUrl: 'https://sparrowfood.com/contact'
         },
         breadcrumbs: [
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit, OnDestroy {
       },
       '/flavors': {
         seo: {
-          title: 'Flavorings - Sparrow Foods | Premium Food Flavorings',
+          title: 'Flavorings - Sparrow Food | Premium Food Flavorings',
           description: 'Discover our range of premium flavorings and food additives. Enhance your products with our high-quality flavor solutions.',
           canonicalUrl: 'https://sparrowfood.com/flavors'
         },
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit, OnDestroy {
       },
       '/seasonings': {
         seo: {
-          title: 'Seasonings - Sparrow Foods | Premium Food Seasonings',
+          title: 'Seasonings - Sparrow Food | Premium Food Seasonings',
           description: 'Explore our premium seasonings and spice blends. Perfect for food manufacturers looking to enhance flavor profiles.',
           canonicalUrl: 'https://sparrowfood.com/seasonings'
         },

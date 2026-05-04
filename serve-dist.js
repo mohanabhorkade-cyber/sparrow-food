@@ -3,7 +3,7 @@ const compression = require('compression');
 const path = require('path');
 
 const app = express();
-const distFolder = path.join(__dirname, 'dist', 'sparrow-foods', 'browser');
+const distFolder = path.join(__dirname, 'dist', 'sparrow-food', 'browser');
 const port = process.env.PORT || 4000;
 
 app.use(compression({
@@ -27,5 +27,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Serving Sparrow Foods review build at http://localhost:${port}`);
+  console.log(`Serving Sparrow Food review build at http://localhost:${port}`);
 });

@@ -1,7 +1,7 @@
 {
-  "name": "sparrow-foods-backend",
+  "name": "sparrow-food-backend",
   "version": "1.0.0",
-  "description": "Backend for Sparrow Foods",
+  "description": "Backend for Sparrow Food",
   "main": "server.js",
   "engines": {
     "node": "20.x"

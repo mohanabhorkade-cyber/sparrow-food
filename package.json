@@ -1,5 +1,5 @@
 {
-  "name": "sparrow-foods",
+  "name": "sparrow-food",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,9 +8,9 @@
     "build:prod": "node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:ssr": "node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng build --configuration production && node --max-old-space-size=2048 ./node_modules/@angular/cli/bin/ng run sparrow-foods:server",
-    "serve:ssr": "npm run build:ssr && node --max-old-space-size=2048 dist/sparrow-foods/server/main.js",
-    "serve:ssr:sparrow-foods": "node --max-old-space-size=2048 dist/sparrow-foods/server/main.js",
+    "build:ssr": "node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng build --configuration production && node --max-old-space-size=2048 ./node_modules/@angular/cli/bin/ng run sparrow-food:server",
+    "serve:ssr": "npm run build:ssr && node --max-old-space-size=2048 dist/sparrow-food/server/main.js",
+    "serve:ssr:sparrow-food": "node --max-old-space-size=2048 dist/sparrow-food/server/main.js",
     "preview": "npm run build:prod && node serve-dist.js",
     "optimize-images": "node optimize-images.js"
   },

@@ -79,7 +79,7 @@ export class SeoService {
     }
 
     metaTags.push({ property: 'og:type', content: data.type || 'website' });
-    metaTags.push({ property: 'og:site_name', content: data.siteName || 'Sparrow Foods' });
+    metaTags.push({ property: 'og:site_name', content: data.siteName || 'Sparrow Food' });
 
     // Twitter Card tags
     metaTags.push({ name: 'twitter:card', content: data.twitterCard || 'summary_large_image' });
@@ -177,13 +177,13 @@ export class SeoService {
   }
 
   /**
-   * Generate organization structured data for Sparrow Foods
+   * Generate organization structured data for Sparrow Food
    */
   getOrganizationStructuredData(): any {
     return {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'Sparrow Foods',
+      name: 'Sparrow Food',
       description: 'Premium food ingredients and seasonings supplier',
       url: 'https://sparrowfood.com',
       logo: 'https://sparrowfood.com/assets/images/logo.png',
@@ -209,11 +209,11 @@ export class SeoService {
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: product.name,
-      description: product.description || `${product.name} - Premium food ingredient from Sparrow Foods`,
+      description: product.description || `${product.name} - Premium food ingredient from Sparrow Food`,
       image: product.image,
       brand: {
         '@type': 'Brand',
-        name: product.brand || 'Sparrow Foods'
+        name: product.brand || 'Sparrow Food'
       },
       offers: {
         '@type': 'Offer',
@@ -222,7 +222,7 @@ export class SeoService {
         availability: 'https://schema.org/InStock',
         seller: {
           '@type': 'Organization',
-          name: 'Sparrow Foods'
+          name: 'Sparrow Food'
         }
       },
       category: product.category,
