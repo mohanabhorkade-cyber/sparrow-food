@@ -2,13 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { Subject, takeUntil } from 'rxjs';
 import { EmailService } from '../services/email.service';
 
 @Component({
   selector: 'app-footer',
-  standalone: true,   // ✅ mark as standalone
-  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule],
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule, HttpClientModule],
+  providers: [EmailService],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
