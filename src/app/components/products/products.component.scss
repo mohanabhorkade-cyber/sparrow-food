@@ -27,7 +27,7 @@ $text-muted:    #8a7060;
   color: $text-dark;
   background: $brand-cream url('/assets/images/product_bg.png') no-repeat center top;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: scroll;
   min-height: 100vh;
   position: relative;
 
@@ -1039,4 +1039,50 @@ $text-muted:    #8a7060;
   }
 
   .modal-box { padding: 1.8rem 1.4rem; }
+}
+@media (min-width: 768px) {
+   .products-page {
+    background-attachment: fixed; // ← Keep fixed only on desktop
+   }
+  }
+  @media (max-width: 480px) {
+  .products-page {
+    // Fix background on mobile
+    background-attachment: scroll !important; // ← fixed attachment causes issues on mobile
+    
+    .landing-section {
+      margin-right: 0 !important;  // ← Remove fixed margin
+      
+      .landing-card {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .landing-img-wrap {
+        flex: none !important;
+        max-width: 100% !important;
+        height: 220px;
+      }
+      
+      .landing-info {
+        padding: 1.2rem !important;
+        
+        .landing-list {
+          column-count: 1 !important; // ← Single column on mobile
+        }
+      }
+    }
+    
+    .subcategory-tabs {
+      .tab-btn {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.9rem;
+      }
+    }
+    
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1rem;
+    }
+  }
 }

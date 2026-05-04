@@ -115,7 +115,9 @@
 /* PRODUCTS SECTION */
 .products-section {
   //background: linear-gradient(to bottom, #ffffff, #f3f8f3);
-  background: linear-gradient(to bottom, #dff0df(117, 183, 152.4) 0%, #dff0df 100%);
+  //: linear-gradient(to bottom, #dff0df(117, 183, 152.4) 0%, #dff0df 100%);
+  // FIXED
+background: linear-gradient(to bottom, #dff0df 0%, #c8e6c8 100%);
 }
 
 .card {
@@ -160,6 +162,7 @@
   .hero {
     background-position: center;
     padding: 40px 0;
+     min-height: 100vh;    // ← ADD THIS
   }
 
   .hero-overlay {
@@ -177,11 +180,14 @@
   }
 
   .hero-content h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .features {
+     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 12px;
+    margin-top: 20px;
   }
 }
