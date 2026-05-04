@@ -1,0 +1,1 @@
+{"status":"healthy","timestamp":"2026-05-04T16:55:26.207Z","uptime":40.6603926,"memory":{"rss":47226880,"heapTotal":13500416,"heapUsed":11849208,"external":2249110,"arrayBuffers":16619},"version":"1.0.0","environment":"production"}
