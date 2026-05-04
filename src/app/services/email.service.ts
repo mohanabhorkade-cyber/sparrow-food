@@ -7,22 +7,24 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class EmailService {
-private apiUrl = environment.apiUrl + '/email';
+  private apiUrl = environment.apiUrl + '/email';
+  private baseUrl = environment.apiUrl.replace('/api', ''); // https://sparrow-food-backend.onrender.com
   constructor(private http: HttpClient) { }
-   // Wake up Render backend before sending
+
+  // Wake up Render backend before sending
   private wakeUp(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/health`).pipe(
+    return this.http.get(`${this.baseUrl}/health`).pipe(
       timeout(60000),
-      catchError(() => from([null])) // ignore wake-up errors
+      catchError(() => from([null]))
     );
   }
-   private withTimeout(request: Observable<any>): Observable<any> {
+  private withTimeout(request: Observable<any>): Observable<any> {
     return request.pipe(
       timeout(60000),
       catchError(err => {
         if (err.name === 'TimeoutError') {
           return throwError(() => ({
-            error: { error: 'Request timed out. Server is starting up, please try again in 30 seconds.' }
+            error: { error: 'Server is starting up, please try again in 30 seconds.' }
           }));
         }
         return throwError(() => err);
@@ -30,7 +32,7 @@ private apiUrl = environment.apiUrl + '/email';
     );
   }
 
-   sendPriceList(email: string): Observable<any> {
+  sendPriceList(email: string): Observable<any> {
     return this.wakeUp().pipe(
       switchMap(() => this.withTimeout(
         this.http.post(`${this.apiUrl}/send-price-list`, { email })
