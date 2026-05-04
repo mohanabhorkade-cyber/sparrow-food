@@ -33,13 +33,18 @@ const normalizeEmailAuth = () => {
   }
 
   if (process.env.EMAIL_PASSWORD) {
+    // Remove ALL whitespace including tabs, newlines, etc.
     const rawPassword = process.env.EMAIL_PASSWORD;
     const normalizedPassword = rawPassword.replace(/\s+/g, '');
 
     if (normalizedPassword !== rawPassword) {
-      logger.info('Normalizing EMAIL_PASSWORD by stripping whitespace for Gmail support');
+      logger.info('Normalizing EMAIL_PASSWORD: removing whitespace');
       process.env.EMAIL_PASSWORD = normalizedPassword;
     }
+  }
+
+  if (process.env.CONTACT_EMAIL) {
+    process.env.CONTACT_EMAIL = process.env.CONTACT_EMAIL.trim();
   }
 };
 
@@ -170,8 +175,11 @@ const transporter = nodemailer.createTransport({
 transporter.verify((error, success) => {
   if (error) {
     logger.error('Email configuration error:', error);
+    logger.error('Email User:', process.env.EMAIL_USER);
+    logger.error('Email Password configured:', !!process.env.EMAIL_PASSWORD);
+    logger.warn('Email service verification failed - check EMAIL_USER and EMAIL_PASSWORD in environment');
   } else {
-    logger.info('Email service is ready');
+    logger.info('✓ Email service is ready');
   }
 });
 
@@ -411,8 +419,9 @@ app.use('*', (req, res) => {
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-  logger.info(`Backend server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+const server = app.listen(PORT, HOST, () => {
+  logger.info(`Backend server running on ${HOST}:${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
 });
 
 // Graceful shutdown
