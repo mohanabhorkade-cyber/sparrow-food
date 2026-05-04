@@ -55,7 +55,7 @@ if (process.env.NODE_ENV !== 'production') {
   logger.add(new winston.transports.Console({
     format: winston.format.simple()
   }));
-}
+} 
 
 const app = express();
 app.set('trust proxy', 1);
