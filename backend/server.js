@@ -77,9 +77,9 @@ app.use(cors({
 // Rate Limiting
 const emailLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // limit each IP to 5 requests per windowMs
+  max: 10, // limit each IP to 5 requests per windowMs
   message: {
-    error: 'Too many email requests from this IP, please try again after 15 minutes.'
+    error: 'Too many email requests. Please try again after 15 minutes.'
   },
   standardHeaders: true,
   legacyHeaders: false,
