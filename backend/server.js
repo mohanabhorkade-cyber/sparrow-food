@@ -27,6 +27,24 @@ const logger = winston.createLogger({
   ]
 });
 
+const normalizeEmailAuth = () => {
+  if (process.env.EMAIL_USER) {
+    process.env.EMAIL_USER = process.env.EMAIL_USER.trim();
+  }
+
+  if (process.env.EMAIL_PASSWORD) {
+    const rawPassword = process.env.EMAIL_PASSWORD;
+    const normalizedPassword = rawPassword.replace(/\s+/g, '');
+
+    if (normalizedPassword !== rawPassword) {
+      logger.info('Normalizing EMAIL_PASSWORD by stripping whitespace for Gmail support');
+      process.env.EMAIL_PASSWORD = normalizedPassword;
+    }
+  }
+};
+
+normalizeEmailAuth();
+
 // Add console transport in development
 if (process.env.NODE_ENV !== 'production') {
   logger.add(new winston.transports.Console({
@@ -142,7 +160,10 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD
-  }
+  },
+   connectionTimeout: 10000,  // 10 seconds to connect
+  greetingTimeout: 10000,    // 10 seconds for greeting
+  socketTimeout: 30000       // 30 seconds for socket
 });
 
 // Test email connection
