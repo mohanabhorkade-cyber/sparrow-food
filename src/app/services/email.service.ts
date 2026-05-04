@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, from, Observable, switchMap, throwError, timeout } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
+import { timeout, catchError, switchMap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -8,51 +10,67 @@ import { environment } from '../../environments/environment';
 })
 export class EmailService {
   private apiUrl = environment.apiUrl + '/email';
-  private baseUrl = environment.apiUrl.replace('/api', ''); // https://sparrow-food-backend.onrender.com
-  constructor(private http: HttpClient) { }
+  private baseUrl = environment.apiUrl.replace('/api', '');
 
-  // Wake up Render backend before sending
+  constructor(private http: HttpClient) {}
+
   private wakeUp(): Observable<any> {
     return this.http.get(`${this.baseUrl}/health`).pipe(
-      timeout(60000),
-      catchError(() => from([null]))
-    );
-  }
-  private withTimeout(request: Observable<any>): Observable<any> {
-    return request.pipe(
-      timeout(60000),
-      catchError(err => {
-        if (err.name === 'TimeoutError') {
-          return throwError(() => ({
-            error: { error: 'Server is starting up, please try again in 30 seconds.' }
-          }));
-        }
-        return throwError(() => err);
-      })
+      catchError(() => of(null)) // silently ignore errors, just proceed
     );
   }
 
   sendPriceList(email: string): Observable<any> {
     return this.wakeUp().pipe(
-      switchMap(() => this.withTimeout(
-        this.http.post(`${this.apiUrl}/send-price-list`, { email })
-      ))
+      switchMap(() =>
+        this.http.post(`${this.apiUrl}/send-price-list`, { email }).pipe(
+          timeout(60000),
+          catchError(err => {
+            if (err.name === 'TimeoutError') {
+              return throwError(() => ({
+                error: { error: 'Request timed out. Please try again.' }
+              }));
+            }
+            return throwError(() => err);
+          })
+        )
+      )
     );
   }
 
   sendContactEmail(data: any): Observable<any> {
     return this.wakeUp().pipe(
-      switchMap(() => this.withTimeout(
-        this.http.post(`${this.apiUrl}/send-contact`, data)
-      ))
+      switchMap(() =>
+        this.http.post(`${this.apiUrl}/send-contact`, data).pipe(
+          timeout(60000),
+          catchError(err => {
+            if (err.name === 'TimeoutError') {
+              return throwError(() => ({
+                error: { error: 'Request timed out. Please try again.' }
+              }));
+            }
+            return throwError(() => err);
+          })
+        )
+      )
     );
   }
 
   sendInquiryEmail(data: any): Observable<any> {
     return this.wakeUp().pipe(
-      switchMap(() => this.withTimeout(
-        this.http.post(`${this.apiUrl}/send-inquiry`, data)
-      ))
+      switchMap(() =>
+        this.http.post(`${this.apiUrl}/send-inquiry`, data).pipe(
+          timeout(60000),
+          catchError(err => {
+            if (err.name === 'TimeoutError') {
+              return throwError(() => ({
+                error: { error: 'Request timed out. Please try again.' }
+              }));
+            }
+            return throwError(() => err);
+          })
+        )
+      )
     );
   }
 }
