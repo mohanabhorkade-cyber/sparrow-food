@@ -63,11 +63,15 @@ export class FooterComponent implements OnDestroy {
         this.cdr.markForCheck();
       },
       (error) => {
-        this.errorMessage = 'Failed to send price list. Please try again.';
-        this.isLoading = false;
-        this.cdr.markForCheck();
-        console.error('Email error:', error);
-      }
+  if (error?.error?.error) {
+    this.errorMessage = error.error.error;
+  } else {
+    this.errorMessage = 'Server is starting up. Please wait 30 seconds and try again.';
+  }
+  this.isLoading = false;
+  this.cdr.markForCheck();
+  console.error('Email error:', error);
+}
     );
   }
 }
