@@ -1,0 +1,169 @@
+@use 'sass:color';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+// ─── Tokens ───────────────────────────────────────────────────
+$brand-dark:   #2c1a0e;
+$brand-brown:  #5c3317;
+$brand-amber:  #d4874b;
+$brand-cream:  #fdf6ee;
+$white:        #ffffff;
+
+// ─── Navbar ───────────────────────────────────────────────────
+.navbar {
+  // background: $brand-dark;
+   background: #0d8511;
+  padding: 0 2rem;
+  position: sticky;         // keeps it above page content always
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;            // sits above any page ::before overlays
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+  font-family: 'DM Sans', sans-serif;
+  box-sizing: border-box;
+
+  // Subtle bottom border accent
+  border-bottom: 1px solid rgba($brand-amber, 0.2);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+  gap: 16px;
+}
+
+// ─── Logo ─────────────────────────────────────────────────────
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.navbar-logo {
+  // height: 54px;
+  margin-right: 41rem;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  display: block;
+}
+
+// ─── Nav List ─────────────────────────────────────────────────
+.nav-list {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+
+  li { margin: 0; }
+
+  a {
+    font-family: 'DM Sans', sans-serif;
+    color: rgba($white, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+
+    &:hover {
+      color: $white;
+      background: rgba($white, 0.07);
+    }
+
+    // Active route
+    &.active {
+      background: $brand-amber;
+      color: $white !important;
+      font-weight: 600;
+    }
+  }
+}
+
+// ─── Hamburger Toggle ────────────────────────────────────────
+.navbar-toggle {
+  display: none;
+  border: 1px solid rgba($white, 0.25);
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: $white;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  &:hover { background: rgba($white, 0.08); }
+}
+
+// ─── Mobile ───────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1.2rem;
+  }
+
+  .navbar-container {
+    height: 62px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .nav-list {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    background: color.adjust($brand-dark, $lightness: 5%);
+    padding: 0.8rem 1rem;
+    border-top: 1px solid rgba($white, 0.08);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+
+    &.open {
+      display: flex;
+      animation: dropDown 0.25s ease both;
+    }
+
+    a {
+      width: 100%;
+      padding: 0.65rem 1rem;
+      font-size: 0.95rem;
+      border-radius: 8px;
+    }
+  }
+
+  .navbar-logo {
+    height: 44px;
+  }
+}
+
+@keyframes dropDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

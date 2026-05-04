@@ -1,0 +1,68 @@
+<footer class="footer bg-dark text-white pb-3">
+  <div class="container">
+    <div class="row">
+
+      <!-- COMPANY -->
+      <div class="col-md-3">
+        <h5 class="footer-title">COMPANY</h5>
+        <ul class="list-unstyled">
+          <li><a routerLink="/about" class="footer-link" (click)="scrollToTop()">About</a></li>
+          <li><a routerLink="/contact" class="footer-link" (click)="scrollToTop()">Contact Us</a></li>
+          <li><a routerLink="/products" routerLinkActive="active" class="footer-link" (click)="scrollToTop()">Products</a></li>
+        </ul>
+      </div>
+
+      <!-- OPENING HOURS -->
+      <div class="col-md-3">
+        <h5 class="footer-title">OPENING HOURS</h5>
+        <p>Mon - Saturday: 10am - 6:30pm</p>
+        <p>Sunday: Weekly Off Day</p>
+      </div>
+
+      <!-- ADDRESS -->
+      <div class="col-md-3">
+        <h5 class="footer-title">ADDRESS</h5>
+        <p>Sparrow Food Industries <br>
+          Plot Number R1-1, <br>
+          Survey number 115/4 <br>
+          Hinjewadi - kasarsai road,<br>
+          Nearby Chaitanya Education Institution, At.Nere,Post. Jambhe,<br>
+          Dist.pune - 411033
+        </p>
+      </div>
+
+      <!-- GET PRICE LIST -->
+      <div class="col-md-3">
+        <h5 class="footer-title">GET PRICE LIST</h5>
+        <form (ngSubmit)="sendPriceList()" #priceListForm="ngForm" novalidate>
+          <input 
+            type="email" 
+            class="form-control mb-2" 
+            placeholder="Enter your email here"
+            [(ngModel)]="email"
+            name="email"
+            required>
+          <button 
+            type="submit" 
+            class="btn btn-danger w-100"
+            [disabled]="isLoading">
+            {{ isLoading ? 'Sending...' : 'SEND ME THE PRICE LIST' }}
+          </button>
+        </form>
+        <div *ngIf="successMessage" class="alert alert-success mt-2 small">
+          {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-2 small">
+          {{ errorMessage }}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- <hr class="border-light my-4">
+
+    <div class="text-center">
+      <p>© Sparrow Foods | All Rights Reserved</p>
+    </div> -->
+  </div>
+</footer>

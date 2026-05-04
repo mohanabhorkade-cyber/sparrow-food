@@ -1,0 +1,109 @@
+{
+  "productGroups": [
+    "Seasoning",
+    "Dried Fruit & Vegetable Flakes",
+    "Fruit & Vegetable Powders",
+    "Tea,Coffee & Milk Premixes",
+    "Instant Drink Beverage Premixes",
+    "Mixes for Cocktail Beverages",
+    "Powdered Salts",
+    "Flavours & Extracts",
+    "Bakery Ingredients/Additives",
+    "Confectionery Ingredients/Additives",
+    "Dairy Product Ingredients/Additives",
+    "Beverage Ingredients/Additives - A.Carbonated Soft Drink (CSD)",
+    "Beverage Ingredients/Additives - B.Fruit Based Beverage",
+    "Seasoning Ingredients/Additives",
+    "Food Colours"
+  ],
+  "groupDefinitions": {
+    "Seasoning": {
+      "description": "Seasoning solutions with dedicated subcategories and product lines.",
+      "image": "assets/images/seasonings_hero.jpeg",
+      "subItems": [
+        {
+          "label": "Extruded Snacks",
+          "description": "Seasonings for extruded snack products.",
+          "image": "assets/images/extruded_snack.jpeg",
+          "items": [
+            "Peri Peri",
+            "Cheese",
+            "Tangy Tomato",
+            "Manchurian",
+            "Masala Munch",
+            "Schezwan",
+            "Green Chutney"
+          ]
+        },
+        {
+          "label": "Indian Namkeen",
+          "description": "Spice blends for namkeen varieties.",
+          "image": "assets/images/indian_numkin.jpeg",
+          "items": [
+            "Chaat Masala",
+            "Bhel Puri Masala",
+            "Dabeli Masala",
+            "Garam Masala",
+            "Punjabi Tadka",
+            "Hing Jeera",
+            "Navratan Mix Masala",
+            "Sambar Masala",
+            "Khatta Mitha",
+            "Bikaneri Bhujiya Spice Mix",
+            "Farsan Masala",
+            "Garlic Sev Masala",
+            "Kachori Masala",
+            "Panipuri Masala",
+            "Jhalmuri Masala"
+          ]
+        },
+        {
+          "label": "Potato Chips",
+          "description": "Flavours for potato chips.",
+          "image": "assets/images/potato_chips.jpeg",
+          "items": [
+            "Cream & Onion",
+            "Spanish Tomato",
+            "Magic Masala",
+            "Chilli Lemon",
+            "Thai Sweet Chilli",
+            "Chilli Tadka Seasoning",
+            "Lasun Makhani Seasoning",
+            "Pizza Seasoning",
+            "Spicy Treat Pudina Seasoning"
+          ]
+        },
+        {
+          "label": "Noodles & Pasta",
+          "description": "Flavours for noodles and pasta.",
+          "image": "assets/images/noodles_pasta.jpeg",
+          "items": [
+            "Hakka Noodle Masala",
+            "Noodle Masala Seasoning",
+            "Mirch Noodle Masala",
+            "Chinese Seasoning",
+            "Korean Hot & Spicy Seasoning",
+            "Schezwan Noodle Masala",
+            "Manchurian Seasoning",
+            "Magic Masala",
+            "Jafrani Biryani Noodle Masala",
+            "Peri Peri Pasta Seasoning",
+            "Cheese Pasta Seasoning",
+            "Tomato Pasta Seasoning",
+            "Italian Herb Pasta Seasoning"
+          ]
+        },
+        {
+          "label": "Jain Seasonings",
+          "description": "Jain-friendly seasoning options.",
+          "image": "assets/images/jain_seasonings.jpeg",
+          "items": [
+            "Jain Masala",
+            "Jain Chutney",
+            "Jain Pickle Masala"
+          ]
+        }
+      ]
+    }
+  }
+}

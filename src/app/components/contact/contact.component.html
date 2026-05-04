@@ -1,0 +1,89 @@
+<div class="contact-page">
+  <div class="contact-header">
+    <h2>Get In Touch for Your Food Ingredients Enquiry</h2>
+    <p>Let us know your ingredient needs and we'll deliver the perfect blend for your business.</p>
+  </div>
+
+  <div *ngIf="productImage || productName" class="product-summary">
+    <div class="product-preview-card">
+      <img *ngIf="productImage" appLazyImage [src]="productImage" [alt]="productName" />
+      <div class="product-info">
+        <h4>Inquiry for</h4>
+        <p>{{ productName || 'General product inquiry' }}</p>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="contactForm" class="contact-form" (submit)="submitContact(); $event.preventDefault()">
+    <div class="form-group">
+      <input 
+        formControlName="name" 
+        type="text" 
+        class="form-control mb-2" 
+        placeholder="Enter your full name" 
+      />
+    </div>
+
+    <div class="form-group">
+      <input 
+        formControlName="email" 
+        type="email" 
+        class="form-control mb-2" 
+        placeholder="Enter your email (e.g., example&#64;domain.com)" 
+        [class.is-invalid]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+      />
+      <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="error-message">
+        <span *ngIf="contactForm.get('email')?.hasError('required')">
+          Please enter your email address.
+        </span>
+        <span *ngIf="contactForm.get('email')?.hasError('email')">
+          Please enter a correct email address (e.g., example&#64;domain.com).
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <textarea 
+        formControlName="message" 
+        class="form-control mb-2" 
+        placeholder="Tell us about your quantity, packaging, or Customization needs" 
+        rows="5"
+      ></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-danger" [disabled]="isSubmitting || contactForm.invalid">
+      {{ isSubmitting ? 'Sending...' : 'Reach Us' }}
+    </button>
+  </form>
+
+  <div *ngIf="confirmationMessage" class="confirmation-message" [class.error]="isError" [class.success]="!isError">
+    {{ confirmationMessage }}
+  </div>
+
+  <div class="contact-details">
+    <div class="address-row">
+      <div class="address-column">
+        <h4>Plant Address</h4>
+        <p>📍Sparrow Food Industries <br>
+        Plot Number R1-1,<br>
+        Survey number 115/4<br>
+        Hinjewadi - kasarsai road,<br>
+        Nearby Chaitanya Education Institution, At.Nere,Post. Jambhe,<br>
+         Dist.pune - 411033<br>
+       </p>
+        <p><b>📞 Mobile:</b> 7276130808</p>
+      </div>
+      <div class="address-column">
+        <h4>Office Address</h4>
+        <p>📍Sparrow Food Industries <br>
+        Row house number 08,<br>
+        Shivaganga housing society,<br>
+        Opp.manas sarovar,<br>
+        Lane number B10,<br>
+        Dhayri phata,<br>
+        Pune- 411041</p>
+        <p><b>📞 Mobile:</b> 7276120808</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Sour Cream & Onion Snack Masala",
+    "category": "snacks",
+    "subItem": "Extruded Snacks",
+    "brand": "Sparrow Food Industries",
+    "packSize": "25 kg",
+    "shelfLife": "12 months",
+    "moq": "500 kg",
+    "freight": "Actual",
+    "price": "150 INR/kg",
+    "image": "assets/images/snack_masala.jpeg"
+  },
+  {
+    "name": "Tangy Tomato Seasoning",
+    "category": "seasonings",
+    "subItem": "Dry Seasonings",
+    "brand": "Sparrow Food Industries",
+    "packSize": "20 kg",
+    "shelfLife": "9 months",
+    "moq": "300 kg",
+    "freight": "Actual",
+    "price": "120 INR/kg",
+    "image": "assets/images/tangy_tomato.jpeg"
+  },
+  {
+    "name": "Mango Fruit Flavor Concentrate",
+    "category": "flavors",
+    "subItem": "Fruit Flavors",
+    "brand": "Sparrow Food Industries",
+    "packSize": "10 kg",
+    "shelfLife": "18 months",
+    "moq": "200 kg",
+    "freight": "Actual",
+    "price": "200 INR/kg",
+    "image": "assets/images/mango_flavor.jpeg"
+  },
+  {
+    "name": "Barbecue Potato Chips Seasoning",
+    "category": "snacks",
+    "subItem": "Potato Chips",
+    "brand": "Sparrow Food Industries",
+    "packSize": "25 kg",
+    "shelfLife": "12 months",
+    "moq": "400 kg",
+    "freight": "Actual",
+    "price": "140 INR/kg",
+    "image": "assets/images/barbecue_chips.jpeg"
+  },
+  {
+    "name": "Tangy Tomato Dry Seasoning",
+    "category": "seasonings",
+    "subItem": "Dry Seasonings",
+    "brand": "Sparrow Food Industries",
+    "packSize": "20 kg",
+    "shelfLife": "9 months",
+    "moq": "300 kg",
+    "freight": "Actual",
+    "price": "120 INR/kg",
+    "image": "assets/images/tangy_tomato.jpeg"
+  },
+  {
+    "name": "Garlic Pepper Dry Seasoning",
+    "category": "seasonings",
+    "subItem": "Dry Seasonings",
+    "brand": "Sparrow Food Industries",
+    "packSize": "20 kg",
+    "shelfLife": "9 months",
+    "moq": "300 kg",
+    "freight": "Actual",
+    "price": "130 INR/kg",
+    "image": "assets/images/garlic_pepper.jpeg"
+  },
+  {
+    "name": "Lemon Tea Beverage Flavor",
+    "category": "flavors",
+    "subItem": "Beverage Flavors",
+    "brand": "Sparrow Food Industries",
+    "packSize": "12 kg",
+    "shelfLife": "18 months",
+    "moq": "250 kg",
+    "freight": "Actual",
+    "price": "180 INR/kg",
+    "image": "assets/images/lemon_tea.jpeg"
+  }
+]

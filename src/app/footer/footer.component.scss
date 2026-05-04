@@ -1,0 +1,191 @@
+@use 'sass:color';
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+// ─── Tokens ───────────────────────────────────────────────────
+$brand-dark:   #2c1a0e;
+$brand-brown:  #5c3317;
+$brand-amber:  #d4874b;
+$brand-cream:  #fdf6ee;
+$brand-light:  #f5e9d8;
+$white:        #ffffff;
+
+// ─── Footer ───────────────────────────────────────────────────
+.footer {
+  // Override Bootstrap bg-dark — use brand dark explicitly
+  background: $brand-dark !important;
+  color: rgba($white, 0.6);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 10;            // sits above any page ::before overlay
+
+  // Subtle top border
+  border-top: 1px solid rgba($brand-amber, 0.2);
+
+  // Grain texture overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 1.5rem;
+  }
+
+  // ── Section Titles ──────────────────────────────────────────
+  .footer-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $brand-amber;
+    margin-bottom: 1.3rem;
+  }
+
+  // ── Links ───────────────────────────────────────────────────
+  .footer-link {
+    display: inline-block;
+    color: rgba($white, 0.55);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 0.3rem 0;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      color: $brand-amber;
+      transform: translateX(3px);
+    }
+  }
+
+  .list-unstyled li {
+    margin-bottom: 0.5rem;
+  }
+
+  // ── Info Text ───────────────────────────────────────────────
+  p {
+    color: rgba($white, 0.55);
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  :host ::ng-deep footer.footer.pt-5 {
+  padding-top: 0 !important;
+}
+
+  // ── Email Input ─────────────────────────────────────────────
+  input.form-control {
+    background: rgba($white, 0.07);
+    border: 1px solid rgba($white, 0.15);
+    border-radius: 8px;
+    color: $white;
+    font-size: 0.88rem;
+    padding: 0.65rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.25s ease, background 0.25s ease;
+
+    &::placeholder {
+      color: rgba($white, 0.35);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: rgba($brand-amber, 0.6);
+      background: rgba($white, 0.1);
+      box-shadow: none;
+      color: $white;
+    }
+  }
+
+  // ── Submit Button ───────────────────────────────────────────
+  button[type="submit"] {
+    background: $brand-amber !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: $white !important;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.7rem 1rem !important;
+    transition: all 0.25s ease;
+    width: 100%;
+
+    &:hover:not([disabled]) {
+      background: color.adjust($brand-amber, $lightness: -8%) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba($brand-amber, 0.3);
+    }
+
+    &[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  // ── Alerts ──────────────────────────────────────────────────
+  .alert {
+    border-radius: 8px;
+    font-size: 0.82rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .alert-success {
+    background: rgba(#2e7d32, 0.2);
+    border: 1px solid rgba(#2e7d32, 0.4);
+    color: #81c784;
+  }
+
+  .alert-danger {
+    background: rgba(#c62828, 0.2);
+    border: 1px solid rgba(#c62828, 0.4);
+    color: #ef9a9a;
+  }
+
+  // ── Divider ─────────────────────────────────────────────────
+  hr {
+    border: none;
+    border-top: 1px solid rgba($white, 0.08) !important;
+    margin: 2.5rem 0 1.5rem !important;
+  }
+
+  // ── Copyright ───────────────────────────────────────────────
+  .text-center p {
+    font-size: 0.8rem;
+    color: rgba($white, 0.3);
+    letter-spacing: 0.03em;
+    margin: 0;
+  }
+
+  // ── Grid layout override (Bootstrap row) ────────────────────
+  .row {
+    gap: 2rem 0;
+
+    [class*="col-"] {
+      padding-right: 2.5rem;
+    }
+  }
+}
+
+// ─── Responsive ───────────────────────────────────────────────
+@media (max-width: 768px) {
+  .footer {
+    .container { padding: 2.5rem 1.2rem 1.2rem; }
+
+    .row [class*="col-"] {
+      padding-right: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}

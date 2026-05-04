@@ -1,0 +1,77 @@
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <span class="tagline">QUALITY INGREDIENTS. BETTER FOOD.</span>
+      <div class="features">
+        <div class="feature">
+          <span>🌱</span>
+          <div>
+            <strong>Premium Quality</strong>
+            <p>Best in class ingredients</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <span>🛡️</span>
+          <div>
+            <strong>Food Safety</strong>
+            <p>International standards</p>
+          </div>
+        </div>
+<div class="feature">
+          <span>⚗️</span>
+          <div>
+            <strong>Innovation</strong>
+            <p>For a better tomorrow</p>
+          </div>
+        </div>
+        
+      </div>
+      
+
+      
+
+      <h1>
+        Premium Food Ingredients From Sparrow Food Industries
+      </h1>
+
+      <p>
+        Food Additives, Instant Mixes & Ingredients for the Food Industry
+      </p>
+
+      <a class="btn btn-success explore-btn" routerLink="/products" style="background-color: #0d8511;">
+        🌿 Explore Products
+      </a>
+
+      <!-- FEATURES -->
+      
+
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section container py-5">
+  <h2 class="text-center mb-4">Discover Our Ingredient Range</h2>
+
+  <div class="row">
+    <div class="col-md-4 mb-4"
+      *ngFor="let category of productCategories; trackBy: trackByCategory">
+
+      <a class="card card-link"
+         [routerLink]="['/products']"
+         [queryParams]="{ group: category.queryGroup }">
+
+        <img [src]="category.image" [alt]="category.title">
+
+        <div class="card-body">
+          <h5>{{ category.title }}</h5>
+          <p>{{ category.description }}</p>
+          <span class="explore-link">Explore Now →</span>
+        </div>
+
+      </a>
+    </div>
+  </div>
+</section>

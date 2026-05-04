@@ -1,0 +1,12 @@
+// Global styles
+:host ::ng-deep {
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}
+
+.main-content {
+  min-height: calc(100vh - 100px);
+  // padding: 2rem 0;
+}
+

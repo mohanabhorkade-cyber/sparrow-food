@@ -1,0 +1,52 @@
+<header class="navbar">
+  <div class="navbar-container">
+
+    <!-- LOGO -->
+    <div class="navbar-brand logo-wrapper">
+      <a routerLink="/" (click)="closeMenu()">
+        <img class="navbar-logo" src="assets/images/logo1.png" alt="Sparrow Foods Logo" />
+      </a>
+    </div>
+
+    <button
+      class="navbar-toggle"
+      type="button"
+      aria-label="Toggle navigation"
+      [attr.aria-expanded]="menuOpen"
+      (click)="toggleMenu()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- MENU -->
+    <ul class="nav-list" [class.open]="menuOpen">
+
+      <li>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
+          Home
+        </a>
+      </li>
+
+      <!-- PRODUCTS -->
+      <li>
+        <a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">
+          Products
+        </a>
+      </li>
+      <li>
+        <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">
+          About
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">
+          Contact
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</header>

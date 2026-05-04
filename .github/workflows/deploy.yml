@@ -1,0 +1,93 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install frontend dependencies
+      run: npm ci
+
+    - name: Install backend dependencies
+      run: cd backend && npm ci
+
+    - name: Run frontend tests
+      run: npm test -- --watch=false --browsers=ChromeHeadless
+
+    - name: Build frontend
+      run: npm run build:prod
+
+    - name: Build SSR
+      run: npm run build:ssr
+
+    - name: Lint code
+      run: npm run lint || true
+
+  build-and-deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build for production
+      run: npm run build:prod
+
+    - name: Build SSR
+      run: npm run build:ssr
+
+    - name: Optimize images
+      run: npm run optimize-images
+
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-args: '--prod'
+
+    - name: Deploy backend to Render
+      run: |
+        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+
+    - name: Notify on success
+      if: success()
+      run: |
+        echo "Deployment successful!"
+        # Add Slack/Discord notification here if needed
+
+    - name: Notify on failure
+      if: failure()
+      run: |
+        echo "Deployment failed!"
+        # Add failure notification here

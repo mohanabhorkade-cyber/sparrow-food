@@ -1,0 +1,16 @@
+<h2>Seasoning Products</h2>
+
+<div class="row">
+  <div class="col-md-4" *ngFor="let p of products; trackBy: trackByProduct">
+    <img appLazyImage [src]="p.image" class="img-fluid" alt="{{ p.name }}">
+
+    <div>
+      <h5>{{ p.name }}</h5>
+      <p><b>Category:</b> {{ p.subItem }}</p>
+      <p><b>Brand:</b> {{ p.brand }}</p>
+      <p><b>Pack Size:</b> {{ p.packSize }}</p>
+      <p><b>Shelf Life:</b> {{ p.shelfLife }}</p>
+      <p><b>Freight:</b> {{ p.freight }}</p>
+    </div>
+  </div>
+</div>

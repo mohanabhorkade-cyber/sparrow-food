@@ -1,0 +1,38 @@
+{
+  "Extruded Snacks": {
+    "items": ["Extruded Snack Masala", "Corn Puffs Masala", "Pellet Snack Masala", "Cheese Blast Masala"],
+    "image": "assets/images/extruded_snack.jpeg"
+  },
+  "Potato Chips": {
+    "items": ["Classic Salt", "Masala", "Barbecue", "Peri-Peri"],
+    "image": "assets/images/potato_chips.jpeg"
+  },
+  "Namkeen": {
+    "items": ["Aloo Bhujia", "Moong Dal", "Mixture", "Chana Jor Garam"],
+    "image": "assets/images/namkeen.jpeg"
+  },
+  "Dry Seasonings": {
+    "items": ["Tangy Tomato", "Hot & Spicy", "Chaat Masala", "Garlic Pepper"],
+    "image": "assets/images/seasoning_dry.jpeg"
+  },
+  "Liquid Seasonings": {
+    "items": ["Sauce Base", "Glaze Mix", "Marinade Concentrate"],
+    "image": "assets/images/seasoning_liquid.jpeg"
+  },
+  "Spray Seasonings": {
+    "items": ["Spray Coating", "Puffed Coating", "Crispy Coat"],
+    "image": "assets/images/seasoning_spray.jpeg"
+  },
+  "Fruit Flavors": {
+    "items": ["Strawberry", "Mango", "Orange", "Litchi"],
+    "image": "assets/images/flavors_fruit.jpeg"
+  },
+  "Beverage Flavors": {
+    "items": ["Lemon Tea", "Cola", "Energy Drink", "Cold Coffee"],
+    "image": "assets/images/flavors_beverage.jpeg"
+  },
+  "Savory Flavors": {
+    "items": ["Tomato", "Barbecue", "Cheese", "Peri Peri"],
+    "image": "assets/images/flavors_savory.jpeg"
+  }
+}

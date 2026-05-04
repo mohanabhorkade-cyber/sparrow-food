@@ -1,0 +1,134 @@
+<div class="about-page">
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-grain"></div>
+    <div class="hero-circles">
+      <span class="circle c1"></span>
+      <span class="circle c2"></span>
+      <span class="circle c3"></span>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="line">Sparrow</span>
+        <span class="line accent">Food Industries</span>
+      </h1>
+      <p class="hero-tagline">Your Trusted Partner for Food Ingredients &amp; Additives</p>
+      <p class="hero-sub">
+        Leading manufacturer, repacker, distributor, and trader of food ingredients and additives.
+        Based in Nere, Hinjewadi, Pune — serving India and global markets including the
+        Middle East, Africa, and South Asia.
+      </p>
+      <div class="hero-cta-row">
+        <a routerLink="/contact" class="btn-primary-hero" (click)="scrollToTop()">Get in Touch</a>
+        <a routerLink="/products" class="btn-outline-hero" (click)="scrollToTop()">Our Products</a>
+      </div>
+    </div>
+    <!-- <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div> -->
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-inner container">
+      <div class="stat-card" *ngFor="let stat of stats; trackBy: trackByStat">
+        <div class="stat-number">{{ stat.number }}</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="mv-section">
+    <div class="mv-bg-text">PURPOSE</div>
+    <div class="container mv-inner">
+      <div class="mv-block mission">
+        <div class="mv-icon">🎯</div>
+        <h2 class="mv-heading">Our Mission</h2>
+        <p>To simplify food ingredient sourcing by delivering high-quality, innovative, and customized solutions that create real value for our customers — every single time.</p>
+      </div>
+      <div class="mv-divider"></div>
+      <div class="mv-block vision">
+        <div class="mv-icon">🌏</div>
+        <h2 class="mv-heading">Our Vision</h2>
+        <p>To become a trusted and preferred global partner for food ingredients, known for reliability, quality, and truly customer-focused solutions across every market we serve.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Reasons to Partner</span>
+        <h2 class="section-title">Why Choose Sparrow?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card" *ngFor="let item of whyChoose; index as i; trackBy: trackByWhyChoose">
+          <div class="why-card-inner">
+            <div class="why-number">{{ ('0' + (i + 1)).slice(-2) }}</div>
+            <h5>{{ item.title }}</h5>
+            <p>{{ item.desc }}</p>
+          </div>
+          <div class="why-card-shine"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Sets Us Apart / Strengths -->
+  <section class="strengths-section">
+    <div class="container">
+      <div class="section-header light">
+        <h2 class="section-title">Our Strengths</h2>
+      </div>
+      <div class="strengths-grid">
+        <div class="strength-item" *ngFor="let item of setsApart; trackBy: trackBySetsApart">
+          <div class="strength-dot"></div>
+          <div class="strength-text">
+            <h5>{{ item.title }}</h5>
+            <p>{{ item.desc }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="team-arc"></div>
+    <div class="container team-inner">
+      <div class="team-text">
+        <span class="section-tag">The People Behind It</span>
+        <h2 class="section-title">Our Team</h2>
+        <p>A dedicated team of <strong>20+ professionals</strong> including R&amp;D experts, sourcing specialists, and technical sales professionals ensures that we deliver the right solutions at the right time — with precision and care.</p>
+      </div>
+      <div class="team-visual">
+        <div class="team-ring outer">
+          <div class="team-avatar" *ngFor="let i of [1,2,3,4,5,6,7,8]">
+            <span>{{ ['R&D','SRC','SAL','QC','LOG','MKT','OPS','FIN'][i-1] }}</span>
+          </div>
+        </div>
+        <div class="team-core">20+<br><small>Experts</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-grain"></div>
+    <div class="cta-circles">
+      <span class="cta-c cc1"></span>
+      <span class="cta-c cc2"></span>
+    </div>
+    <div class="cta-inner container">
+      <h2>Ready to Elevate<br><em>Your Products?</em></h2>
+      <p>Partner with Sparrow Food Industries for premium ingredients that make a lasting difference — from sourcing to delivery.</p>
+      <!-- <a routerLink="/contact" class="btn-cta" (click)="scrollToTop()">Get in Touch →</a> -->
+    </div>
+  </section>
+
+</div>

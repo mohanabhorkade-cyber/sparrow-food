@@ -1,0 +1,284 @@
+<div class="products-page">
+
+  <!-- ═══════════════════════════════════════════════════════
+       CATEGORY MENU VIEW
+  ════════════════════════════════════════════════════════ -->
+  <div *ngIf="showMenu" class="menu-view">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-header-grain"></div>
+      <div class="page-header-glow"></div>
+      <div class="page-header-inner container">
+        <h1 class="page-title">Our Products</h1>
+        <p class="page-subtitle">
+          Select a category below to explore our range of premium food ingredients and additives.
+        </p>
+      </div>
+    </div>
+
+    <!-- Category Grid -->
+    <div class="category-section container">
+      <div class="category-grid">
+        <div
+          class="category-card"
+          *ngFor="let group of productGroups; trackBy: trackByGroup; index as i"
+          (click)="selectProductGroup(group)"
+        >
+          <!-- <div class="category-card-number">{{ ('0' + (i + 1)).slice(-2) }}</div> -->
+          <div class="category-card-body">
+            <h3>{{ group }}</h3>
+            <span class="category-explore">Explore →</span>
+          </div>
+          <div class="category-card-bar"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PRODUCTS DETAIL VIEW
+  ════════════════════════════════════════════════════════ -->
+  <div *ngIf="!showMenu" class="detail-view">
+
+    <!-- Back Nav -->
+    <div class="back-nav container">
+      <button (click)="goHome()" class="btn-back">
+        <span class="btn-back-arrow">←</span>
+        <span>All Categories</span>
+      </button>
+    </div>
+
+    <!-- Category Hero Banner -->
+    <div class="category-banner" [ngClass]="categoryHeroClass">
+      <div class="category-banner-overlay"></div>
+      <div class="category-banner-inner container">
+        <div class="category-banner-text">
+          <h2>{{ categoryLabel }}</h2>
+          <p>{{ categoryDescription }}</p>
+        </div>
+
+        <!-- Subcategory Tabs -->
+        <div
+          *ngIf="(selectedCategory || selectedGroup) && currentSubItems.length && !(selectedGroup && !selectedCategory && currentSubItems.length === 1)"
+          class="subcategory-tabs"
+        >
+          <button
+            *ngFor="let subItem of currentSubItems; trackBy: trackBySubItem"
+            class="tab-btn"
+            [class.active]="(selectedCategory ? selectedSubItem : selectedGroupSubItem) === subItem"
+            (click)="selectSubItem(subItem)"
+          >
+            {{ subItem }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group Summary Prompt -->
+    <div *ngIf="selectedGroup && !selectedCategory && !selectedGroupSubItem" class="group-prompt container">
+      <div class="prompt-card">
+        <div class="prompt-icon">📦</div>
+        <h4>{{ selectedGroup }}</h4>
+        <p>Please select a sub-category above to view the specific product list.</p>
+      </div>
+    </div>
+
+    <!-- ───── Sub-item Landing Card ───── -->
+    <div id="subitem-landing-section" *ngIf="selectedGroup && selectedGroupSubItem && !selectedProduct" class="landing-section container">
+      <div class="landing-card">
+
+        <div class="landing-img-wrap">
+          <ng-container *ngIf="selectedCategory ? selectedSubItem : selectedGroupSubItem as key">
+            <img
+              [src]="selectedCategory ? getSubItemImage() : selectedGroupSubItemImage"
+              [attr.data-key]="key"
+              alt="subcategory"
+            />
+          </ng-container>
+        </div>
+
+        <div class="landing-info">
+          <h3>{{ selectedCategory ? selectedSubItem : selectedGroupSubItem }}</h3>
+          <p class="landing-desc">
+            {{ selectedCategory
+              ? 'We offer Seasonings for different snack bases like Potato Chips, etc.'
+              : selectedGroupSubItemObject?.description || 'Choose an item to see the product list.' }}
+          </p>
+          <ul class="landing-list">
+            <li *ngFor="let item of (selectedCategory ? getSubItemItems() : selectedGroupSubItemItems); trackBy: trackBySubItem">
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ───── Products Grid ───── -->
+    <div id="products-grid-section" *ngIf="showSubItemList && isSubItemSelectionActive && !selectedProduct" class="products-area container">
+
+      <!-- Fallback Packaging Card -->
+      <div *ngIf="showFallbackPackaging" class="packaging-card">
+        <div class="packaging-card-header">
+          <h3>Packaging Formats</h3>
+          <p>Available in the following configurations</p>
+        </div>
+        
+        <!-- Only Powdered Packaging for Seasoning, Dried Fruit, etc. -->
+        <div *ngIf="showOnlyPowderedPackaging" class="packaging-options">
+          <div class="packaging-option">
+            <div class="packaging-icon"></div>
+            <h4>Functional Dry Blends</h4>
+            <p>Master carton: 1 Kg × 20 = 20 Kgs Net weight</p>
+          </div>
+        </div>
+        
+        <!-- Both Liquid and Powdered Packaging for Flavours, Ingredients, etc. -->
+        <div *ngIf="showBothPackaging" class="packaging-options">
+          <div class="packaging-option">
+            <div class="packaging-icon"></div>
+            <h4>Liquid Formulations</h4>
+            <p>Master carton: 1 ltr × 20 = 20 ltr Net weight</p>
+          </div>
+          <div class="packaging-divider"></div>
+          <div class="packaging-option">
+            <div class="packaging-icon"></div>
+            <h4>Functional Dry Blends</h4>
+            <p>Master carton: 1 Kg × 20 = 20 Kgs Net weight</p>
+          </div>
+        </div>
+        
+        <p class="packaging-note">
+          We are open to customisation of product / packaging / private labels for larger orders.
+          Please contact us for further discussion.
+        </p>
+        <button type="button" class="btn-enquire" (click)="openInquiryModal(filteredProducts[0])">
+          Send Enquiry
+        </button>
+      </div>
+
+      <!-- Product Cards -->
+      <div *ngIf="!showFallbackPackaging" class="products-grid">
+        <div
+          class="product-card"
+          [class.fallback-card]="product.fallback"
+          *ngFor="let product of filteredProducts; trackBy: trackByProduct"
+          (click)="selectProduct(product)"
+          (mouseenter)="preloadImage(product.image)"
+        >
+          <div class="product-img-wrap">
+            <img appLazyImage [src]="product.image" [alt]="product.name" />
+            <div class="product-img-overlay">
+              <span>View Details</span>
+            </div>
+          </div>
+          <div class="product-info">
+            <h4>{{ product.name }}</h4>
+            <p class="product-brand"><span>Brand</span> {{ product.brand }}</p>
+            <p class="product-pack">{{ product.packSize }}</p>
+          </div>
+          <div class="product-card-footer">
+            <span class="view-details-link">View Details →</span>
+          </div>
+        </div>
+
+        <div *ngIf="filteredProducts.length === 0" class="no-products">
+          <div class="no-products-icon">🔍</div>
+          <p>No products found for this selection.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ───── Product Detail ───── -->
+    <div class="product-detail-area container" *ngIf="selectedProduct">
+      <div class="product-detail-card">
+        <div class="product-detail-img">
+          <img appLazyImage [src]="selectedProduct.image" [alt]="selectedProduct.name" />
+        </div>
+        <div class="product-detail-info">
+          <span class="product-detail-tag">Product Detail</span>
+          <h3>{{ selectedProduct.name }}</h3>
+          <div class="detail-meta">
+            <div class="detail-row">
+              <span class="detail-label">Brand</span>
+              <span class="detail-value">{{ selectedProduct.brand }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Pack Size</span>
+              <span class="detail-value">{{ selectedProduct.packSize }}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Shelf Life</span>
+              <span class="detail-value">{{ selectedProduct.shelfLife }}</span>
+            </div>
+          </div>
+          <button class="btn-enquire" (click)="inquire(selectedProduct)">
+            Inquire Now →
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /detail-view -->
+
+</div><!-- /products-page -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     INQUIRY MODAL
+     NOTE: Intentionally placed OUTSIDE .products-page so that
+     position:fixed works correctly without being trapped inside
+     the isolation:isolate stacking context of .products-page.
+════════════════════════════════════════════════════════ -->
+<div class="modal-backdrop" *ngIf="showInquiryModal">
+  <div class="modal-box">
+    <button type="button" class="modal-close" (click)="closeInquiryModal()">✕</button>
+    <div class="modal-header">
+      <!-- <span class="modal-tag">Quick Enquiry</span> -->
+      <h3>Tell Us What You Need</h3>
+    </div>
+
+    <!-- <div class="modal-product-info" *ngIf="inquiryProduct">
+      <p><strong>Brand:</strong> {{ inquiryProduct.brand }}</p>
+      <p><strong>Pack Size:</strong> {{ inquiryProduct.packSize }}</p>
+    </div> -->
+
+    <form class="modal-form" (submit)="submitInquiry(); $event.preventDefault()">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Your full name" [(ngModel)]="inquiryForm.name" name="inquiryName" required />
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com" [(ngModel)]="inquiryForm.email" name="inquiryEmail" required />
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea
+          placeholder="Tell us about your quantity, packaging, or customization needs..."
+          rows="4"
+          [(ngModel)]="inquiryForm.message"
+          name="inquiryMessage"
+          required
+        ></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="btn-submit">Send Enquiry</button>
+        <button type="button" class="btn-cancel" (click)="closeInquiryModal()">Cancel</button>
+      </div>
+    </form>
+
+    <p
+      class="modal-status"
+      *ngIf="inquiryStatus"
+      [class.success]="inquiryStatusType === 'success'"
+      [class.error]="inquiryStatusType === 'error'"
+    >
+      {{ inquiryStatus }}
+    </p>
+  </div>
+</div>

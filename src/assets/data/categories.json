@@ -1,0 +1,23 @@
+[
+  {
+    "key": "snacks",
+    "label": "Snack Seasonings",
+    "description": "Flavor blends for extruded snacks, potato chips, namkeen and savory bites.",
+    "styleClass": "snacks-hero",
+    "subItems": ["Extruded Snacks", "Potato Chips", "Namkeen"]
+  },
+  {
+    "key": "seasonings",
+    "label": "Seasoning Systems",
+    "description": "Industrial seasoning systems for coated snacks and crunchy snack foods.",
+    "styleClass": "seasonings-hero",
+    "subItems": ["Dry Seasonings", "Liquid Seasonings", "Spray Seasonings"]
+  },
+  {
+    "key": "flavors",
+    "label": "Flavors",
+    "description": "Food-grade flavor technology for beverages, dairy, bakery and snacks.",
+    "styleClass": "flavors-hero",
+    "subItems": ["Fruit Flavors", "Beverage Flavors", "Savory Flavors"]
+  }
+]
