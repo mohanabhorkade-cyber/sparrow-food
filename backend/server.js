@@ -60,7 +60,7 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express();
 app.set('trust proxy', 1);
 
-// Security Middleware
+// Security Middleware  
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
