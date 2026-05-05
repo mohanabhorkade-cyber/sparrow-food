@@ -19,6 +19,9 @@
   "node": "20.20.2"
 },
   "dependencies": {
+    "@angular-devkit/build-angular": "19.2.23",
+    "@angular/cli": "19.2.23",
+    "@angular/compiler-cli": "19.2.20",
     "@sentry/angular": "^8.0.0",
     "@angular/animations": "19.2.20",
     "@angular/common": "19.2.20",
@@ -39,9 +42,6 @@
     "zone.js": "0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "19.2.23",
-    "@angular/cli": "19.2.23",
-    "@angular/compiler-cli": "19.2.20",
     "@types/express": "^4.17.17",
     "@types/jasmine": "5.1.0",
     "@types/node": "18.18.0",
