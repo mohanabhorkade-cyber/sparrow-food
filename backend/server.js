@@ -175,11 +175,13 @@ const transporter = nodemailer.createTransport({
 // Test email connection
 transporter.verify((error, success) => {
   if (error) {
+    console.error("❌ TRANSPORT ERROR:", error);
     logger.error('Email configuration error:', error);
     logger.error('Email User:', process.env.EMAIL_USER);
     logger.error('Email Password configured:', !!process.env.EMAIL_PASSWORD);
     logger.warn('Email service verification failed - check EMAIL_USER and EMAIL_PASSWORD in environment');
   } else {
+     console.log("✅ SMTP READY");
     logger.info('✓ Email service is ready');
   }
 });
@@ -214,6 +216,13 @@ const sanitizeInput = (input) => {
 // Send Price List Email
 app.post('/api/email/send-price-list', async (req, res) => {
   try {
+     // 🔥 ADD DEBUG LOGS HERE
+    console.log("===== EMAIL DEBUG START =====");
+    console.log("EMAIL_USER:", process.env.EMAIL_USER);
+    console.log("EMAIL_PASSWORD exists:", !!process.env.EMAIL_PASSWORD);
+    console.log("EMAIL_PASSWORD length:", process.env.EMAIL_PASSWORD?.length);
+    console.log("CONTACT_EMAIL:", process.env.CONTACT_EMAIL);
+    console.log("Request Body:", req.body);
     // Validate input
     const { error, value } = priceListSchema.validate(req.body);
     if (error) {
@@ -272,6 +281,7 @@ app.post('/api/email/send-price-list', async (req, res) => {
       message: 'Price list request received successfully'
     });
   } catch (error) {
+    console.error("❌ FULL ERROR:", error);
     logger.error('Error sending price list emails:', error);
     res.status(500).json({
       error: 'Failed to process price list request. Please try again later.'
