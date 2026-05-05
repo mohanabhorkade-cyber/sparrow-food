@@ -1,4 +1,10 @@
 <app-header></app-header>
+<div class="global-spinner-overlay" *ngIf="isLoading$ | async" aria-live="polite" aria-busy="true">
+  <div class="global-spinner-box">
+    <div class="global-spinner"></div>
+    <div class="global-spinner-text">Processing...</div>
+  </div>
+</div>
 <main class="main-content">
   <router-outlet></router-outlet>
 </main>

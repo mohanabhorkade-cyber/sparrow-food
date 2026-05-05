@@ -63,7 +63,18 @@
          [routerLink]="['/products']"
          [queryParams]="{ group: category.queryGroup }">
 
-        <img [src]="category.image" [alt]="category.title">
+        <picture>
+          <source [srcset]="getOptimizedImage(category.image)" type="image/webp" />
+          <img
+            [ngSrc]="category.image"
+            width="420"
+            height="280"
+            loading="lazy"
+            decoding="async"
+            [alt]="category.title"
+            (error)="handleImageError($event)"
+          />
+        </picture>
 
         <div class="card-body">
           <h5>{{ category.title }}</h5>

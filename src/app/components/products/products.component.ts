@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +7,6 @@ import { Subject, takeUntil } from 'rxjs';
 import { EmailService } from '../../services/email.service';
 import { DataService } from '../../services/data.service';
 import { SeoService } from '../../services/seo.service';
-import { LazyImageDirective } from '../../shared/lazy-image.directive';
 
 interface Product {
   name: string;
@@ -33,7 +32,7 @@ interface Category {
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule, LazyImageDirective],
+  imports: [CommonModule, HttpClientModule, FormsModule, NgOptimizedImage],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -58,6 +57,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   };
   inquiryStatus = '';
   inquiryStatusType: 'error' | 'success' | '' = '';
+  isInquirySubmitting = false;
 
   productGroups: string[] = [
     'Seasoning',
@@ -1476,6 +1476,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   subItemData: any = {};
   categories: Category[] = [];
   products: Product[] = [];
+  isProductsLoading = true;
+  pageSize = 8;
+  currentPage = 1;
+  imageFallback = 'assets/images/optimized/image-fallback.svg';
 
   constructor(
     private route: ActivatedRoute,
@@ -1608,9 +1612,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.subItemData = data;
       this.cdr.markForCheck();
     });
-    this.dataService.getProducts().pipe(takeUntil(this.destroy$)).subscribe(data => {
-      this.products = data;
-      this.cdr.markForCheck();
+    this.dataService.getProducts().pipe(takeUntil(this.destroy$)).subscribe({
+      next: data => {
+        this.products = data;
+        this.cdr.markForCheck();
+      },
+      complete: () => {
+        this.isProductsLoading = false;
+        this.cdr.markForCheck();
+      }
     });
   }
 
@@ -1625,6 +1635,43 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   trackByProduct(index: number, product: Product): string {
     return product.name || index.toString();
+  }
+
+  get displayedProducts(): Product[] {
+    return this.filteredProducts.slice(0, this.currentPage * this.pageSize);
+  }
+
+  get hasMoreProducts(): boolean {
+    return this.filteredProducts.length > this.displayedProducts.length;
+  }
+
+  loadMoreProducts(): void {
+    this.currentPage++;
+    this.cdr.markForCheck();
+  }
+
+  resetPagination(): void {
+    this.currentPage = 1;
+  }
+
+  getWebpPath(image: string): string {
+    if (!image) {
+      return this.imageFallback;
+    }
+    return image
+      .replace(/assets\/images\/(?:optimized\/)?/, 'assets/images/optimized/')
+      .replace(/\.(jpe?g|png|gif|svg)$/i, '.webp');
+  }
+
+  getOptimizedImage(image: string): string {
+    return image || this.imageFallback;
+  }
+
+  handleImageError(event: Event): void {
+    const img = event.target as HTMLImageElement | null;
+    if (img && img.src.indexOf(this.imageFallback) === -1) {
+      img.src = this.imageFallback;
+    }
   }
 
   get selectedCategoryObject() {
@@ -1717,6 +1764,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   goTo(category: string) {
+    this.resetPagination();
     this.showMenu = false;
     this.selectedCategory = category;
     this.selectedGroup = '';
@@ -1734,6 +1782,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   selectProductGroup(group: string) {
+    this.resetPagination();
     this.showMenu = false;
     this.selectedGroup = group;
     this.selectedCategory = '';
@@ -1754,6 +1803,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   selectSubItem(subItem: string) {
+    this.resetPagination();
+
     if (this.selectedCategory) {
       this.selectedSubItem = subItem;
       this.showSubItemList = true;
@@ -1812,6 +1863,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   goHome() {
+    this.resetPagination();
     this.showMenu = true;
     this.selectedCategory = '';
     this.selectedSubItem = '';
@@ -1969,6 +2021,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.inquiryStatusType = '';
     this.inquiryStatus = 'Sending inquiry...';
+    this.isInquirySubmitting = true;
 
     this.emailService.sendInquiryEmail({
       name,
@@ -1976,6 +2029,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       message
     }).pipe(takeUntil(this.destroy$)).subscribe({
       next: () => {
+        this.isInquirySubmitting = false;
         this.inquiryStatusType = 'success';
         this.inquiryStatus = 'Thank you! Your inquiry has been submitted. We will contact you with further instructions.';
         this.inquiryForm = {
@@ -1986,6 +2040,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       },
       error: (error) => {
+        this.isInquirySubmitting = false;
         this.inquiryStatusType = 'error';
         if (error.error && error.error.error) {
           this.inquiryStatus = error.error.error;

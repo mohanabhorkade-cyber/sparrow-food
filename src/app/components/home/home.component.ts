@@ -1,7 +1,7 @@
 // home.component.ts
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { NgFor, NgOptimizedImage } from '@angular/common';
 import { SeoService } from '../../services/seo.service';
 
 interface ProductCategory {
@@ -14,12 +14,13 @@ interface ProductCategory {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, NgFor],
+  imports: [RouterLink, NgFor, NgOptimizedImage],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
+  imageFallback = 'assets/images/optimized/image-fallback.svg';
   productCategories: ProductCategory[] = [
     { title: 'Seasonings', description: 'Fiery, Smoky & Savory Classics', image: 'assets/images/optimized/main_seasoning.webp', queryGroup: 'Seasoning' },
     { title: 'Flavours (Liquid & Spray Dried Powder)', description: 'Premium Flavours & Natural Extracts', image: 'assets/images/Main_Flavours_Extracts1.png', queryGroup: 'Flavours (Liquid & Spray Dried Powder)' },
@@ -68,5 +69,22 @@ export class HomeComponent implements OnInit {
 
   trackByCategory(index: number, category: ProductCategory): string {
     return category.queryGroup || index.toString();
+  }
+
+  getOptimizedImage(image: string): string {
+    if (!image) {
+      return this.imageFallback;
+    }
+    const optimized = image
+      .replace(/assets\/images\/(?:optimized\/)?/, 'assets/images/optimized/')
+      .replace(/\.(jpe?g|png|gif|svg)$/i, '.webp');
+    return optimized;
+  }
+
+  handleImageError(event: Event): void {
+    const img = event.target as HTMLImageElement | null;
+    if (img && img.src.indexOf(this.imageFallback) === -1) {
+      img.src = this.imageFallback;
+    }
   }
 }

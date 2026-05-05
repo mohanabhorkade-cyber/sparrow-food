@@ -93,11 +93,19 @@
 
         <div class="landing-img-wrap">
           <ng-container *ngIf="selectedCategory ? selectedSubItem : selectedGroupSubItem as key">
-            <img
-              [src]="selectedCategory ? getSubItemImage() : selectedGroupSubItemImage"
-              [attr.data-key]="key"
-              alt="subcategory"
-            />
+            <picture>
+              <source [srcset]="getWebpPath(selectedCategory ? getSubItemImage() : selectedGroupSubItemImage)" type="image/webp" />
+              <img
+                [ngSrc]="selectedCategory ? getSubItemImage() : selectedGroupSubItemImage"
+                width="640"
+                height="420"
+                loading="lazy"
+                decoding="async"
+                [attr.data-key]="key"
+                alt="subcategory"
+                (error)="handleImageError($event)"
+              />
+            </picture>
           </ng-container>
         </div>
 
@@ -162,33 +170,64 @@
       </div>
 
       <!-- Product Cards -->
-      <div *ngIf="!showFallbackPackaging" class="products-grid">
-        <div
-          class="product-card"
-          [class.fallback-card]="product.fallback"
-          *ngFor="let product of filteredProducts; trackBy: trackByProduct"
-          (click)="selectProduct(product)"
-          (mouseenter)="preloadImage(product.image)"
-        >
-          <div class="product-img-wrap">
-            <img appLazyImage [src]="product.image" [alt]="product.name" />
-            <div class="product-img-overlay">
-              <span>View Details</span>
+      <div *ngIf="!showFallbackPackaging">
+        <div *ngIf="showSubItemList && isProductsLoading" class="products-grid">
+          <div class="product-card skeleton-card" *ngFor="let skeleton of [1,2,3,4,5,6,7,8]">
+            <div class="product-img-wrap skeleton-box"></div>
+            <div class="product-info">
+              <div class="skeleton-line skeleton-title"></div>
+              <div class="skeleton-line skeleton-meta"></div>
+              <div class="skeleton-line skeleton-meta short"></div>
             </div>
-          </div>
-          <div class="product-info">
-            <h4>{{ product.name }}</h4>
-            <p class="product-brand"><span>Brand</span> {{ product.brand }}</p>
-            <p class="product-pack">{{ product.packSize }}</p>
-          </div>
-          <div class="product-card-footer">
-            <span class="view-details-link">View Details →</span>
           </div>
         </div>
 
-        <div *ngIf="filteredProducts.length === 0" class="no-products">
-          <div class="no-products-icon">🔍</div>
-          <p>No products found for this selection.</p>
+        <div *ngIf="!isProductsLoading" class="products-grid">
+          <div
+            class="product-card"
+            [class.fallback-card]="product.fallback"
+            *ngFor="let product of displayedProducts; trackBy: trackByProduct"
+            (click)="selectProduct(product)"
+            (mouseenter)="preloadImage(product.image)"
+          >
+            <div class="product-img-wrap">
+              <picture>
+                <source [srcset]="getWebpPath(product.image)" type="image/webp" />
+                <img
+                  [ngSrc]="getOptimizedImage(product.image)"
+                  width="360"
+                  height="240"
+                  loading="lazy"
+                  decoding="async"
+                  [alt]="product.name"
+                  (error)="handleImageError($event)"
+                />
+              </picture>
+              <div class="product-img-overlay">
+                <span>View Details</span>
+              </div>
+            </div>
+            <div class="product-info">
+              <h4>{{ product.name }}</h4>
+              <p class="product-brand"><span>Brand</span> {{ product.brand }}</p>
+              <p class="product-pack">{{ product.packSize }}</p>
+            </div>
+            <div class="product-card-footer">
+              <span class="view-details-link">View Details →</span>
+            </div>
+          </div>
+
+          <div *ngIf="displayedProducts.length === 0" class="no-products">
+            <div class="no-products-icon">🔍</div>
+            <p>No products found for this selection.</p>
+          </div>
+        </div>
+
+        <div *ngIf="hasMoreProducts && !isProductsLoading" class="load-more-wrapper">
+          <button type="button" class="btn-load-more" (click)="loadMoreProducts()">
+            Load More Products
+          </button>
+          <p class="load-more-summary">Showing {{ displayedProducts.length }} of {{ filteredProducts.length }} products</p>
         </div>
       </div>
 
@@ -198,7 +237,18 @@
     <div class="product-detail-area container" *ngIf="selectedProduct">
       <div class="product-detail-card">
         <div class="product-detail-img">
-          <img appLazyImage [src]="selectedProduct.image" [alt]="selectedProduct.name" />
+          <picture>
+            <source [srcset]="getWebpPath(selectedProduct.image)" type="image/webp" />
+            <img
+              [ngSrc]="getOptimizedImage(selectedProduct.image)"
+              width="760"
+              height="520"
+              loading="lazy"
+              decoding="async"
+              [alt]="selectedProduct.name"
+              (error)="handleImageError($event)"
+            />
+          </picture>
         </div>
         <div class="product-detail-info">
           <span class="product-detail-tag">Product Detail</span>
@@ -268,7 +318,9 @@
         ></textarea>
       </div>
       <div class="modal-actions">
-        <button type="submit" class="btn-submit">Send Enquiry</button>
+        <button type="submit" class="btn-submit" [disabled]="isInquirySubmitting">
+          {{ isInquirySubmitting ? 'Sending...' : 'Send Enquiry' }}
+        </button>
         <button type="button" class="btn-cancel" (click)="closeInquiryModal()">Cancel</button>
       </div>
     </form>

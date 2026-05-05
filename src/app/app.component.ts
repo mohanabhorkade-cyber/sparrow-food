@@ -1,16 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { SeoService } from './services/seo.service';
+import { LoadingService } from './services/loading.service';
 import { filter, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, BreadcrumbComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -18,11 +19,15 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'sparrow-food';
   currentBreadcrumbs: Array<{ label: string; url?: string; active?: boolean }> = [];
   private destroy$ = new Subject<void>();
+  isLoading$: Observable<boolean>;
 
   constructor(
     private router: Router,
-    private seoService: SeoService
-  ) {}
+    private seoService: SeoService,
+    private loadingService: LoadingService
+  ) {
+    this.isLoading$ = this.loadingService.isLoading$;
+  }
 
   ngOnInit(): void {
     // Set default SEO data for the application
