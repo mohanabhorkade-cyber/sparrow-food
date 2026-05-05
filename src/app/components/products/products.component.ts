@@ -1748,6 +1748,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.selectedGroupSubItem = '';
       this.showSubItemList = false;
     }
+
+    this.cdr.markForCheck();
+    this.scrollToProductDetails();
   }
 
   selectSubItem(subItem: string) {
@@ -1765,30 +1768,47 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.showSubItemList = true;
     this.selectedProduct = null;
     this.cdr.markForCheck();
-    this.scrollToProductsGrid();
+    this.scrollToSubitemLandingSection();
 
     // No assignment to selectedGroupSubItemObject; it's a getter
   }
 
-  scrollToProductsGrid() {
-    setTimeout(() => {
-      const target =
-        document.getElementById('subitem-landing-section') ||
-        document.getElementById('products-grid-section');
+  private scrollToElementById(elementId: string, maxAttempts = 60) {
+    let attempts = 0;
 
+    const scrollToTarget = () => {
+      const target = document.getElementById(elementId);
       if (target) {
-        const offset = 80; // adjust based on your navbar height
-        const y =
-          target.getBoundingClientRect().top +
-          window.pageYOffset -
-          offset;
+        const header = document.querySelector('header.navbar');
+        const offset = header ? header.getBoundingClientRect().height + 16 : 88;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
 
         window.scrollTo({
-          top: y,
+          top: Math.max(0, top),
           behavior: 'smooth'
         });
+        return;
       }
-    }, 50);
+
+      attempts += 1;
+      if (attempts < maxAttempts) {
+        window.requestAnimationFrame(scrollToTarget);
+      }
+    };
+
+    window.requestAnimationFrame(() => window.requestAnimationFrame(scrollToTarget));
+  }
+
+  scrollToProductsGrid() {
+    this.scrollToElementById('products-grid-section');
+  }
+
+  scrollToSubitemLandingSection() {
+    this.scrollToElementById('subitem-landing-section');
+  }
+
+  scrollToProductDetails() {
+    this.scrollToElementById('product-detail-view');
   }
 
   goHome() {

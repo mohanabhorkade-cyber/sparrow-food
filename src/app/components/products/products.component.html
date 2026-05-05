@@ -52,7 +52,7 @@
     </div>
 
     <!-- Category Hero Banner -->
-    <div class="category-banner" [ngClass]="categoryHeroClass">
+    <div id="product-detail-view" class="category-banner" [ngClass]="categoryHeroClass">
       <div class="category-banner-overlay"></div>
       <div class="category-banner-inner container">
         <div class="category-banner-text">
@@ -71,7 +71,8 @@
             [class.active]="(selectedCategory ? selectedSubItem : selectedGroupSubItem) === subItem"
             (click)="selectSubItem(subItem)"
           >
-            {{ subItem }}
+            <span class="tab-name">{{ subItem }}</span>
+            <span class="tab-explore">Explore →</span>
           </button>
         </div>
       </div>

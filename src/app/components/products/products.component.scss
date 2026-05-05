@@ -282,29 +282,65 @@ $text-muted:    #8a7060;
     gap: 0.6rem;
 
     .tab-btn {
-      padding: 0.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem 1.4rem;
+      min-width: 10rem;
       border-radius: 50px;
       border: 1px solid rgba($white, 0.3);
-      background: rgba($white, 0.1);
-      color: rgba($white, 0.85);
-      font-size: 0.85rem;
+      // background: linear-gradient(180deg, rgba($white, 0.72) 0%, rgba($white, 0.25) 50%, rgba($white, 0.12) 100%);
+          background: linear-gradient(180deg, var(--bs-gray-700) 0%, #343a40 50%, var(--bs-border-color-translucent) 100%);
+      color: rgba($white, 0.95);
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.25s ease;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(12px);
+      gap: 0.2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba($brand-brown, 0.08), inset 0 1px 0 rgba($white, 0.65);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba($white, 0.7), transparent 35%);
+        opacity: 0.35;
+        pointer-events: none;
+      }
+
+      .tab-name {
+        font-size: 0.95rem;
+        line-height: 1.2;
+        z-index: 1;
+      }
+
+      .tab-explore {
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        opacity: 0.75;
+        z-index: 1;
+      }
 
       &:hover {
-        background: rgba($white, 0.25);
-        color: $white;
+        background: linear-gradient(180deg, rgba($white, 0.8) 0%, rgba($white, 0.3) 50%, rgba($white, 0.16) 100%);
+        color: $brand-brown;
         transform: translateY(-2px);
       }
 
       &.active {
-        background: $white;
+        background: rgba($white, 0.98);
         color: $brand-brown;
-        border-color: $white;
+        border-color: rgba($white, 0.95);
         font-weight: 600;
+
+        .tab-explore {
+          opacity: 1;
+        }
       }
     }
   }
@@ -336,6 +372,11 @@ $text-muted:    #8a7060;
   // ══════════════════════════════════════════════════════
   // LANDING CARD
   // ══════════════════════════════════════════════════════
+  #subitem-landing-section,
+  #products-grid-section {
+    scroll-margin-top: 96px;
+  }
+
   .landing-section {
      max-width: 1100px;
     margin-left: auto;   // pushes content right

@@ -22,7 +22,7 @@ interface ProductCategory {
 export class HomeComponent implements OnInit {
   productCategories: ProductCategory[] = [
     { title: 'Seasonings', description: 'Fiery, Smoky & Savory Classics', image: 'assets/images/optimized/main_seasoning.webp', queryGroup: 'Seasoning' },
-    { title: 'Flavours & Extracts', description: 'Premium Flavours & Natural Extracts', image: 'assets/images/optimized/Main_Flavours_Extracts.webp', queryGroup: 'Flavours & Extracts' },
+    { title: 'Flavours (Liquid & Spray Dried Powder)', description: 'Premium Flavours & Natural Extracts', image: 'assets/images/optimized/Main_Flavours_Extracts.webp', queryGroup: 'Flavours (Liquid & Spray Dried Powder)' },
     { title: 'Dried Fruit & Vegetable Flakes', description: 'Natural Dried Ingredients', image: 'assets/images/optimized/DriedFruit_Vegetable_Flakes.webp', queryGroup: 'Dried Fruit & Vegetable Flakes' },
     { title: 'Fruit & Vegetable Powders', description: 'Pure & Natural Powdered Ingredients', image: 'assets/images/optimized/fruit_vegatable_powder.webp', queryGroup: 'Fruit & Vegetable Powders' },
     { title: 'Tea,Coffee & Milk Premixes', description: 'Instant Premixes for Every Sip', image: 'assets/images/optimized/Tea_coffee_milk_premix.webp', queryGroup: 'Tea,Coffee & Milk Premixes' },
