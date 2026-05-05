@@ -1,5 +1,5 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
@@ -27,28 +27,30 @@ const logger = winston.createLogger({
   ]
 });
 
-const normalizeEmailAuth = () => {
-  if (process.env.EMAIL_USER) {
-    process.env.EMAIL_USER = process.env.EMAIL_USER.trim();
-  }
-
-  if (process.env.EMAIL_PASSWORD) {
-    // Remove ALL whitespace including tabs, newlines, etc.
-    const rawPassword = process.env.EMAIL_PASSWORD;
-    const normalizedPassword = rawPassword.replace(/\s+/g, '');
-
-    if (normalizedPassword !== rawPassword) {
-      logger.info('Normalizing EMAIL_PASSWORD: removing whitespace');
-      process.env.EMAIL_PASSWORD = normalizedPassword;
-    }
-  }
-
+const normalizeEnv = () => {
   if (process.env.CONTACT_EMAIL) {
     process.env.CONTACT_EMAIL = process.env.CONTACT_EMAIL.trim();
   }
+
+  if (process.env.EMAIL_API_KEY) {
+    process.env.EMAIL_API_KEY = process.env.EMAIL_API_KEY.trim();
+  }
 };
 
-normalizeEmailAuth();
+normalizeEnv();
+
+const contactEmail = process.env.CONTACT_EMAIL;
+const resendApiKey = process.env.EMAIL_API_KEY;
+const emailSender = 'Sparrow Food <onboarding@resend.dev>';
+console.log("API KEY exists:", !!process.env.EMAIL_API_KEY);
+console.log("CONTACT_EMAIL:", process.env.CONTACT_EMAIL);
+
+if (!contactEmail || !resendApiKey) {
+  logger.error('Missing required email configuration. EMAIL_API_KEY and CONTACT_EMAIL are required.');
+  process.exit(1);
+}
+
+const resend = new Resend(resendApiKey);
 
 // Add console transport in development
 if (process.env.NODE_ENV !== 'production') {
@@ -160,31 +162,38 @@ const inquirySchema = Joi.object({
   packSize: Joi.string().max(50).optional()
 });
 
-// Configure email transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
-  },
-   connectionTimeout: 10000,  // 10 seconds to connect
-  greetingTimeout: 10000,    // 10 seconds for greeting
-  socketTimeout: 30000       // 30 seconds for socket
-});
+const retryableEmailStatus = [408, 429, 500, 502, 503, 504];
 
-// Test email connection
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("❌ TRANSPORT ERROR:", error);
-    logger.error('Email configuration error:', error);
-    logger.error('Email User:', process.env.EMAIL_USER);
-    logger.error('Email Password configured:', !!process.env.EMAIL_PASSWORD);
-    logger.warn('Email service verification failed - check EMAIL_USER and EMAIL_PASSWORD in environment');
-  } else {
-     console.log("✅ SMTP READY");
-    logger.info('✓ Email service is ready');
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const sendEmail = async (message, maxRetries = 2) => {
+  for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+    try {
+      await resend.emails.send(message);
+      return;
+    } catch (error) {
+      const statusCode = error?.response?.status || error?.response?.statusCode || error?.statusCode || error?.code || 0;
+      const errorMessage = error?.message || 'Unknown Resend error';
+
+      logger.warn('Resend email attempt failed', {
+        attempt: attempt + 1,
+        statusCode,
+        error: errorMessage
+      });
+
+      if (attempt === maxRetries || !retryableEmailStatus.includes(Number(statusCode))) {
+        logger.error('Resend email failed permanently', {
+          statusCode,
+          error: errorMessage,
+          responseBody: error?.response?.data || error?.response?.body || null
+        });
+        throw error;
+      }
+
+      await wait(500 * Math.pow(2, attempt));
+    }
   }
-});
+};
 
 // Global Error Handler Middleware
 const errorHandler = (err, req, res, next) => {
@@ -216,14 +225,6 @@ const sanitizeInput = (input) => {
 // Send Price List Email
 app.post('/api/email/send-price-list', async (req, res) => {
   try {
-     // 🔥 ADD DEBUG LOGS HERE
-    console.log("===== EMAIL DEBUG START =====");
-    console.log("EMAIL_USER:", process.env.EMAIL_USER);
-    console.log("EMAIL_PASSWORD exists:", !!process.env.EMAIL_PASSWORD);
-    console.log("EMAIL_PASSWORD length:", process.env.EMAIL_PASSWORD?.length);
-    console.log("CONTACT_EMAIL:", process.env.CONTACT_EMAIL);
-    console.log("Request Body:", req.body);
-    // Validate input
     const { error, value } = priceListSchema.validate(req.body);
     if (error) {
       logger.warn('Price list validation failed:', error.details[0].message);
@@ -234,13 +235,15 @@ app.post('/api/email/send-price-list', async (req, res) => {
 
     const { email } = value;
     const sanitizedEmail = validator.normalizeEmail(email);
+    if (!sanitizedEmail) {
+      logger.warn('Price list normalization failed for email:', email);
+      return res.status(400).json({ error: 'Invalid email address provided' });
+    }
 
     logger.info('Processing price list request for:', sanitizedEmail);
 
-    const adminEmail = process.env.CONTACT_EMAIL || process.env.EMAIL_USER;
-
-    const userMailOptions = {
-      from: process.env.EMAIL_USER,
+    const userMessage = {
+      from: emailSender,
       to: sanitizedEmail,
       subject: 'Sparrow Food Industries - Price List Request Received',
       html: `
@@ -256,13 +259,14 @@ app.post('/api/email/send-price-list', async (req, res) => {
           Hinjewadi - kasarsai road,<br>
           Nearby Chaitanya Education Institution, At.Nere,Post. Jambhe,<br>
           Dist.pune - 411033</p>
-        <p>Email: ${validator.escape(adminEmail)}</p>
+        <p>Email: ${validator.escape(contactEmail)}</p>
         <p>Phone: +917276130808</p>
-      `};
+      `
+    };
 
-    const adminMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: adminEmail,
+    const adminMessage = {
+      from: emailSender,
+      to: contactEmail,
       subject: `New Price List Request from ${sanitizedEmail}`,
       html: `
         <h3>New Price List Request</h3>
@@ -272,8 +276,7 @@ app.post('/api/email/send-price-list', async (req, res) => {
       `
     };
 
-    await transporter.sendMail(adminMailOptions);
-    await transporter.sendMail(userMailOptions);
+    await Promise.all([sendEmail(adminMessage), sendEmail(userMessage)]);
 
     logger.info('Price list emails sent successfully for:', sanitizedEmail);
     res.json({
@@ -281,7 +284,6 @@ app.post('/api/email/send-price-list', async (req, res) => {
       message: 'Price list request received successfully'
     });
   } catch (error) {
-    console.error("❌ FULL ERROR:", error);
     logger.error('Error sending price list emails:', error);
     res.status(500).json({
       error: 'Failed to process price list request. Please try again later.'
@@ -292,7 +294,6 @@ app.post('/api/email/send-price-list', async (req, res) => {
 // Send Contact Email
 app.post('/api/email/send-contact', async (req, res) => {
   try {
-    // Validate input
     const { error, value } = contactSchema.validate(req.body);
     if (error) {
       logger.warn('Contact validation failed:', error.details[0].message);
@@ -306,11 +307,16 @@ app.post('/api/email/send-contact', async (req, res) => {
     const sanitizedEmail = validator.normalizeEmail(email);
     const sanitizedMessage = sanitizeInput(message);
 
+    if (!sanitizedEmail) {
+      logger.warn('Contact email normalization failed for email:', email);
+      return res.status(400).json({ error: 'Please provide a valid email address' });
+    }
+
     logger.info('Processing contact message from:', sanitizedEmail);
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.CONTACT_EMAIL,
+    const adminMessage = {
+      from: emailSender,
+      to: contactEmail,
       subject: `New Contact Message from ${sanitizedName}`,
       html: `
         <h3>New Message from Contact Form</h3>
@@ -324,9 +330,26 @@ app.post('/api/email/send-contact', async (req, res) => {
       `
     };
 
-    await transporter.sendMail(mailOptions);
+    const userMessage = {
+      from: emailSender,
+      to: sanitizedEmail,
+      subject: 'Sparrow Food Industries - We received your message',
+      html: `
+        <h2>Thank you for contacting Sparrow Food Industries</h2>
+        <p>Hi ${validator.escape(sanitizedName)},</p>
+        <p>We received your message and will respond as soon as possible.</p>
+        <hr>
+        <p><strong>Your message:</strong></p>
+        <p>${sanitizedMessage}</p>
+        <hr>
+        <p>If you need immediate assistance, reply to this email or contact us directly.</p>
+        <p><strong>Contact:</strong> ${validator.escape(contactEmail)}</p>
+      `
+    };
 
-    logger.info('Contact email sent successfully from:', sanitizedEmail);
+    await Promise.all([sendEmail(adminMessage), sendEmail(userMessage)]);
+
+    logger.info('Contact email and confirmation sent successfully from:', sanitizedEmail);
     res.json({
       success: true,
       message: 'Message sent successfully'
@@ -342,7 +365,6 @@ app.post('/api/email/send-contact', async (req, res) => {
 // Send Product Inquiry Email
 app.post('/api/email/send-inquiry', async (req, res) => {
   try {
-    // Validate input
     const { error, value } = inquirySchema.validate(req.body);
     if (error) {
       logger.warn('Inquiry validation failed:', error.details[0].message);
@@ -352,8 +374,6 @@ app.post('/api/email/send-inquiry', async (req, res) => {
     }
 
     const { name, email, message, productName, brand, packSize } = value;
-
-    // Check if inquiry mentions chili flakes
     const inquiryText = `${productName || ''} ${message || ''}`.toLowerCase();
     if (inquiryText.includes('chili flakes')) {
       logger.warn('Blocked chili flakes inquiry from:', email);
@@ -369,11 +389,16 @@ app.post('/api/email/send-inquiry', async (req, res) => {
     const sanitizedBrand = brand ? sanitizeInput(brand) : 'N/A';
     const sanitizedPackSize = packSize ? sanitizeInput(packSize) : 'N/A';
 
+    if (!sanitizedEmail) {
+      logger.warn('Inquiry email normalization failed for email:', email);
+      return res.status(400).json({ error: 'Please provide a valid email address' });
+    }
+
     logger.info('Processing product inquiry from:', sanitizedEmail);
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.CONTACT_EMAIL,
+    const adminMessage = {
+      from: emailSender,
+      to: contactEmail,
       subject: `New Product Inquiry from ${sanitizedName}`,
       html: `
         <h3>New Product Inquiry</h3>
@@ -390,9 +415,26 @@ app.post('/api/email/send-inquiry', async (req, res) => {
       `
     };
 
-    await transporter.sendMail(mailOptions);
+    const userMessage = {
+      from: emailSender,
+      to: sanitizedEmail,
+      subject: 'Sparrow Food Industries - We received your inquiry',
+      html: `
+        <h2>Thank you for your inquiry</h2>
+        <p>Hi ${validator.escape(sanitizedName)},</p>
+        <p>We received your inquiry about <strong>${validator.escape(sanitizedProductName)}</strong>.</p>
+        <p>Our team will review your message and get back to you shortly.</p>
+        <hr>
+        <p><strong>Your message:</strong></p>
+        <p>${sanitizedMessage}</p>
+        <hr>
+        <p>If you need immediate assistance, reply to this email or contact us at ${validator.escape(contactEmail)}.</p>
+      `
+    };
 
-    logger.info('Inquiry email sent successfully from:', sanitizedEmail);
+    await Promise.all([sendEmail(adminMessage), sendEmail(userMessage)]);
+
+    logger.info('Inquiry email and confirmation sent successfully from:', sanitizedEmail);
     res.json({
       success: true,
       message: 'Inquiry sent successfully'

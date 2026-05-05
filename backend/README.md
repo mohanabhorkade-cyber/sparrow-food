@@ -12,17 +12,16 @@ npm install
 ### 2. Configure Environment Variables
 Create a `.env` file in the backend folder with:
 ```
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASSWORD=your-app-password
-CONTACT_EMAIL=your-email@gmail.com
+EMAIL_API_KEY=your-sendgrid-api-key
+CONTACT_EMAIL=contact@sparrowfood.com
 PORT=5000
 ```
 
-### 3. Gmail Setup (if using Gmail)
-- Enable 2-Factor Authentication on your Gmail account
-- Go to Google Account → Security → App passwords
-- Generate an App Password for Mail
-- Use this 16-character password in `.env` as `EMAIL_PASSWORD`
+### 3. SendGrid Setup
+- Create a SendGrid account
+- Add and verify your sender email address or domain
+- Create an API key with `Mail Send` permissions
+- Use that key in `.env` as `EMAIL_API_KEY`
 
 ### 4. Start the Backend
 ```bash
