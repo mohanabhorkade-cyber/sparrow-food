@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgFor, NgOptimizedImage } from '@angular/common';
 import { SeoService } from '../../services/seo.service';
+import { ImagePreloadService } from '../../services/image-preload.service';
 
 interface ProductCategory {
   title: string;
@@ -39,9 +40,20 @@ export class HomeComponent implements OnInit {
     { title: 'Food Colours', description: 'Texture, Colour & Flavour Solutions', image: 'assets/images/food_colors.png', queryGroup: 'Food Colours' }
   ];
 
-  constructor(private seoService: SeoService) {}
+  constructor(
+    private seoService: SeoService,
+    private imagePreloadService: ImagePreloadService
+  ) {}
 
   ngOnInit(): void {
+    // PERFORMANCE: Preload all product category images for instant display
+    const categoryImages = this.productCategories
+      .map(cat => cat.image)
+      .filter(img => img);
+    this.imagePreloadService.preloadImages(categoryImages).catch(() => {
+      // Silently handle errors
+    });
+
     // Set specific SEO for home page
     this.seoService.updateSeo({
       title: 'Sparrow Food - Premium Food Ingredients & Seasonings Supplier',

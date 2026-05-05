@@ -7,6 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { EmailService } from '../../services/email.service';
 import { DataService } from '../../services/data.service';
 import { SeoService } from '../../services/seo.service';
+import { ImagePreloadService } from '../../services/image-preload.service';
 
 interface Product {
   name: string;
@@ -1488,7 +1489,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private seoService: SeoService,
     private cdr: ChangeDetectorRef,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private imagePreloadService: ImagePreloadService
   ) {
 
   }
@@ -1616,6 +1618,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
       next: data => {
         this.products = data;
         this.cdr.markForCheck();
+        
+        // PERFORMANCE: Start preloading all product images in background
+        // This ensures instant display when user clicks/switches products
+        this.imagePreloadService.preloadAllProductImages(data).catch(() => {
+          // Silently handle preload errors
+        });
       },
       complete: () => {
         this.isProductsLoading = false;
@@ -1811,6 +1819,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.selectedProduct = null;
       this.cdr.markForCheck();
       this.scrollToProductsGrid();
+      
+      // PERFORMANCE: Preload images for current category
+      const categoryProducts = this.getSubItemItems();
+      this.imagePreloadService.preloadImages(categoryProducts).catch(() => {});
       return;
     }
 
@@ -1973,14 +1985,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
     if (!src) {
       return;
     }
-
-    const image = new Image();
-    image.src = src;
+    
+    // Use optimized preloading service
+    this.imagePreloadService.preloadImage(src).catch(() => {
+      // Silently handle errors
+    });
   }
 
   selectProduct(product: Product) {
+    // PERFORMANCE: Preload current product image immediately
     this.preloadImage(product.image);
     this.selectedProduct = product;
+    this.cdr.markForCheck();
+    
+    // PERFORMANCE: Smart preload next and previous products for instant switching
+    const currentIndex = this.filteredProducts.indexOf(product);
+    if (currentIndex !== -1) {
+      this.imagePreloadService.smartPreloadAround(this.filteredProducts, currentIndex, 2).catch(() => {});
+    }
   }
 
   openInquiryModal(product: Product) {
