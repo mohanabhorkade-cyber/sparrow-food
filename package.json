@@ -16,7 +16,7 @@
   },
   "private": true,
   "engines": {
-  "node": "20.x"
+  "node": "20.20.2"
 },
   "dependencies": {
     "@sentry/angular": "^8.0.0",
