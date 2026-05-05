@@ -3,7 +3,7 @@
   publish = "dist/sparrow-food/browser"
 
 [build.environment]
-  NODE_VERSION = "20.x"
+  NODE_VERSION = "20.20.2"
   NPM_FLAGS = "--legacy-peer-deps"
 
 [[redirects]]
