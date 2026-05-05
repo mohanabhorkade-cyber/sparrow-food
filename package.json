@@ -15,6 +15,9 @@
     "optimize-images": "node optimize-images.js"
   },
   "private": true,
+  "engines": {
+  "node": "20.x"
+},
   "dependencies": {
     "@sentry/angular": "^8.0.0",
     "@angular/animations": "19.2.20",
