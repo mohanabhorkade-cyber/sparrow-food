@@ -186,7 +186,7 @@ export class SeoService {
       name: 'Sparrow Food',
       description: 'Premium food ingredients and seasonings supplier',
       url: 'https://sparrowfood.com',
-      logo: 'https://sparrowfood.com/assets/images/logo.png',
+      logo: 'https://sparrowfood.com/assets/images/optimized/logo.webp',
       contactPoint: {
         '@type': 'ContactPoint',
         telephone: '+1-XXX-XXX-XXXX',

@@ -19,12 +19,12 @@
   "groupDefinitions": {
     "Seasoning": {
       "description": "Seasoning solutions with dedicated subcategories and product lines.",
-      "image": "assets/images/seasonings_hero.jpeg",
+      "image": "assets/images/optimized/optimized/seasonings_hero.webp",
       "subItems": [
         {
           "label": "Extruded Snacks",
           "description": "Seasonings for extruded snack products.",
-          "image": "assets/images/extruded_snack.jpeg",
+          "image": "assets/images/optimized/extruded_snack.webp",
           "items": [
             "Peri Peri",
             "Cheese",
@@ -38,7 +38,7 @@
         {
           "label": "Indian Namkeen",
           "description": "Spice blends for namkeen varieties.",
-          "image": "assets/images/indian_numkin.jpeg",
+          "image": "assets/images/optimized/indian_numkin.webp",
           "items": [
             "Chaat Masala",
             "Bhel Puri Masala",
@@ -60,7 +60,7 @@
         {
           "label": "Potato Chips",
           "description": "Flavours for potato chips.",
-          "image": "assets/images/potato_chips.jpeg",
+          "image": "assets/images/optimized/potato_chips.webp",
           "items": [
             "Cream & Onion",
             "Spanish Tomato",
@@ -76,7 +76,7 @@
         {
           "label": "Noodles & Pasta",
           "description": "Flavours for noodles and pasta.",
-          "image": "assets/images/noodles_pasta.jpeg",
+          "image": "assets/images/optimized/noodles_pasta.webp",
           "items": [
             "Hakka Noodle Masala",
             "Noodle Masala Seasoning",
@@ -96,7 +96,7 @@
         {
           "label": "Jain Seasonings",
           "description": "Jain-friendly seasoning options.",
-          "image": "assets/images/jain_seasonings.jpeg",
+          "image": "assets/images/jain_seasonings.webp",
           "items": [
             "Jain Masala",
             "Jain Chutney",

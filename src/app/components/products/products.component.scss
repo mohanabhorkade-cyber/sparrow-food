@@ -25,7 +25,7 @@ $text-muted:    #8a7060;
 .products-page {
   font-family: 'DM Sans', sans-serif;
   color: $text-dark;
-  background: $brand-cream url('/assets/images/product_bg.png') no-repeat center top;
+  background: $brand-cream url('/assets/images/optimized/product_bg.webp') no-repeat center top;
   background-size: cover;
   background-attachment: scroll;
   min-height: 100vh;
@@ -548,7 +548,7 @@ $text-muted:    #8a7060;
 
     &:hover {
       transform: translateY(-1px);
-      background: darken($brand-amber, 8%);
+      background: color.adjust($brand-amber, $lightness: -8%);
     }
   }
 

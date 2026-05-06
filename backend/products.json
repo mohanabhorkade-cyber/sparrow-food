@@ -9,7 +9,7 @@
     "moq": "500 kg",
     "freight": "Actual",
     "price": "150 INR/kg",
-    "image": "assets/images/snack_masala.jpeg"
+    "image": "assets/images/optimized/snack_masala.webp"
   },
   {
     "name": "Tangy Tomato Seasoning",
@@ -21,7 +21,7 @@
     "moq": "300 kg",
     "freight": "Actual",
     "price": "120 INR/kg",
-    "image": "assets/images/tangy_tomato.jpeg"
+    "image": "assets/images/optimized/tangy_tomato.webp"
   },
   {
     "name": "Mango Fruit Flavor Concentrate",
@@ -33,7 +33,7 @@
     "moq": "200 kg",
     "freight": "Actual",
     "price": "200 INR/kg",
-    "image": "assets/images/mango_flavor.jpeg"
+    "image": "assets/images/optimized/mango_flavor.webp"
   },
   {
     "name": "Barbecue Potato Chips Seasoning",
@@ -45,7 +45,7 @@
     "moq": "400 kg",
     "freight": "Actual",
     "price": "140 INR/kg",
-    "image": "assets/images/barbecue_chips.jpeg"
+    "image": "assets/images/optimized/barbecue_chips.webp"
   },
   {
     "name": "Tangy Tomato Dry Seasoning",
@@ -57,7 +57,7 @@
     "moq": "300 kg",
     "freight": "Actual",
     "price": "120 INR/kg",
-    "image": "assets/images/tangy_tomato.jpeg"
+    "image": "assets/images/optimized/tangy_tomato.webp"
   },
   {
     "name": "Garlic Pepper Dry Seasoning",
@@ -69,7 +69,7 @@
     "moq": "300 kg",
     "freight": "Actual",
     "price": "130 INR/kg",
-    "image": "assets/images/garlic_pepper.jpeg"
+    "image": "assets/images/optimized/garlic_pepper.webp"
   },
   {
     "name": "Lemon Tea Beverage Flavor",
@@ -81,6 +81,6 @@
     "moq": "250 kg",
     "freight": "Actual",
     "price": "180 INR/kg",
-    "image": "assets/images/lemon_tea.jpeg"
+    "image": "assets/images/optimized/lemon_tea.webp"
   }
 ]

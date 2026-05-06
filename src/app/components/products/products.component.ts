@@ -87,7 +87,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
           label: 'Extruded Snacks',
           description: 'Seasonings for extruded snack products.',
           // image: 'assets/images/optimized/extruded_snack.webp',
-          image: 'assets/images/extruded_snack1.png',
+          image: 'assets/images/optimized/extruded_snack1.webp',
           items: [
             'Biryani Masala Seasoning',
             'Cheesy Onion Seasoning',
@@ -120,7 +120,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
           label: 'Indian Namkeen',
           description: ' Tasty Seasoning blends for namkeen varieties.',
           // image: 'assets/images/optimized/indian_numkin.webp',
-          image: 'assets/images/indian_numkin.png',
+          image: 'assets/images/optimized/indian_numkin.webp',
           items: [
             'Aloo Bhujia Seasoning',
             'Bhelpuri Masala Seasoning',
@@ -216,7 +216,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Jain Seasonings',
           description: 'Seasoning blends for Jain dietary preferences.',
-          image: 'assets/images/jain_seasoning.png',
+          image: 'assets/images/optimized/jain_seasoning.webp',
           items: [
             'Jain Noodle Masala',
             'Jain Pav Bhaji Masala',
@@ -250,7 +250,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Powder Sprinkler',
           description: 'Powder Sprinkler seasoning Offerings.',
-          image: 'assets/images/Powder_Sprinkler.png',
+          image: 'assets/images/optimized/Powder_Sprinkler.webp',
           items: [
             'Cajun Sprinkler Seasoning',
             'Chaat Sprinkler Seasoning',
@@ -398,7 +398,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Batters & Coatings',
           description: 'Seasoning Solutions for batters and coatings.',
-          image: 'assets/images/batters&coating.png',
+          image: 'assets/images/optimized/batters&coating.webp',
           items: [
             'Tempura Batter Mix',
             'Pre Dust',
@@ -427,7 +427,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Flakes',
           description: 'Natural Dried/Dehydrated Ingredients in Flake Form',
-          image: 'assets/images/dried_flakes.png',
+          image: 'assets/images/optimized/dried_flakes.webp',
           items: [
             'Chilli Flakes',
             'Oregano Flakes',
@@ -450,7 +450,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Powders',
           description: 'Pure & Natural Ingredient Powders for Flavor and Color',
-          image: 'assets/images/driedFruits&vegetsble.png',
+          image: 'assets/images/optimized/driedFruits&vegetsble.webp',
           items: [
             'Moringa Leaves Powder',
             'Spinach Powder',
@@ -473,7 +473,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Tea Premixes',
           description: 'Natural & Aromatic Tea Mixes for Instant Brewing',
-          image: 'assets/images/tea_premix.jpeg',
+          image: 'assets/images/optimized/tea_premix.webp',
           items: [
             'Cardamom Tea',
             'Ginger Tea',
@@ -485,7 +485,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Coffee Premixes',
           description: 'Premium Flavoured Coffee Blends',
-          image: 'assets/images/Tea_coffee_milk_premix1.png',
+          image: 'assets/images/optimized/Tea_coffee_milk_premix1.webp',
           items: [
             'Coffee Premix',
             'Mocha Coffee Premix',
@@ -495,7 +495,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Ice Tea Premixes',
           description: 'Natural & Fruity Ice Tea Mixes for Refreshing Beverages',
-          image: 'assets/images/iceteaprimixes.png',
+          image: 'assets/images/optimized/iceteaprimixes.webp',
           items: [
             'Lemon Ice Tea',
             'Peach Ice Tea',
@@ -505,7 +505,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Milkshakes & Beverages',
           description: 'Natural & Creamy Beverage Mixes for Delicious Milkshakes',
-          image: 'assets/images/milkshake.png',
+          image: 'assets/images/optimized/milkshake.webp',
           items: [
             'Strawberry Milkshake',
             'Mango Milkshake',
@@ -515,7 +515,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Smoothie Mixes',
           description: 'Natural & Creamy Smoothie Range for Delicious Blends',
-          image: 'assets/images/smoothie.png',
+          image: 'assets/images/optimized/smoothie.webp',
           items: [
             'Cold Coffee Premix',
             'Vanilla Smoothie Mix',
@@ -527,12 +527,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Instant Drink Beverage Premixes': {
       description: 'Instant drink premixes for beverages.',
-      image: 'assets/images/instant_drinks.jpeg',
+      image: 'assets/images/optimized/instant_drinks.webp',
       subItems: [
         {
           label: 'Instant Drink Beverage Premixes',
           description: 'Natural & Traditional Beverage Premixes for Instant Refreshment',
-          image: 'assets/images/instant_drinks.png',
+          image: 'assets/images/optimized/instant_drinks.webp',
           items: [
             'Hot Chocolate Premix',
             'Drinking Chocolate Mix',
@@ -570,12 +570,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Mixes for Cocktail Beverages': {
       description: 'Cocktail mixes for mixers and ready-to-drink beverages.',
-      image: 'assets/images/cocktail_mixes.jpeg',
+      image: 'assets/images/optimized/cocktail_mixes.webp',
       subItems: [
         {
           label: 'Cocktail Beverages',
           description: 'Exotic & Tangy Cocktail Range for Mixers and Ready-to-Drink Beverages',
-          image: 'assets/images/mixescocktail.png',
+          image: 'assets/images/optimized/mixescocktail.webp',
           items: [
             'Margarita Mix Powder',
             'Lime Margarita Premix',
@@ -614,12 +614,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Powdered Salts': {
       description: 'Powdered salt blends for food seasoning and processing.',
-      image: 'assets/images/powdered_salts.jpeg',
+      image: 'assets/images/optimized/powdered_salts.webp',
       subItems: [
         {
           label: 'Powdered salts',
           description: 'Natural Mineral Salt Collection',
-          image: 'assets/images/powderedsalt.png',
+          image: 'assets/images/optimized/powderedsalt.webp',
           items: [
             'Rock Salt (Sendha Namak)',
             'Himalayan Pink Salt',
@@ -631,12 +631,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Flavours (Liquid & Spray Dried Powder)': {
       description: 'Flavours & Flavour Compounds for Food, Beverage, Bakery, Confectionery, Seasoning and Dairy Applications.',
-      image: 'assets/images/flavours_extracts.jpeg',
+      image: 'assets/images/optimized/flavours_extracts.webp',
       subItems: [
         {
           label: 'Flavours (Liquid & Spray Dried Powder)',
           description: 'Liquid & Spray‑Dried Flavours: Natural, Nature‑Identical & Artificial Flavour Systems for Food, Beverage, Bakery, Confectionery, Seasoning and Dairy Applications. Both in water soluble & oil soluble forms.',
-          image: 'assets/images/flavorandextract.png',
+          image: 'assets/images/optimized/flavorandextract.webp',
           items: [
             'Garlic Flavour',
             'Smoke Flavour',
@@ -714,12 +714,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Bakery Ingredients/Additives': {
       description: 'Bakery ingredients and additives for improved product performance.',
-      image: 'assets/images/bakery_ingredients.jpeg',
+      image: 'assets/images/optimized/bakery_ingredients.webp',
       subItems: [
         {
           label: 'Leavening Agents',
           description: 'Leavening agents for bakery applications',
-          image: 'assets/images/Leavening_agent.png',
+          image: 'assets/images/optimized/Leavening_agent.webp',
           items: [
             'Baking powder',
             'Baking soda (sodium bicarbonate)',
@@ -730,7 +730,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Emulsifiers',
           description: 'Emulsifiers for bakery applications',
-          image: 'assets/images/emulsifiers.png',
+          image: 'assets/images/optimized/emulsifiers.webp',
           items: [
             'Lecithin',
             'Mono & diglycerides (E471)',
@@ -743,7 +743,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Dough Improvers',
           description: 'Dough improvers for bakery applications',
-          image: 'assets/images/dough_improvers.png',
+          image: 'assets/images/optimized/dough_improvers.webp',
           items: [
             'Ascorbic acid (Vitamin C)',
             'Enzyme blends',
@@ -754,7 +754,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Enzymes',
           description: 'Enzymes for bakery applications',
-          image: 'assets/images/enzymes.png',
+          image: 'assets/images/optimized/enzymes.webp',
           items: [
             'Amylase',
             'Lipase',
@@ -765,7 +765,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Preservatives',
           description: 'Preservatives for bakery applications',
-          image: 'assets/images/preservatives.png',
+          image: 'assets/images/optimized/preservatives.webp',
           items: [
             'Calcium propionate',
             'Sodium propionate',
@@ -775,7 +775,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Stabilizers & Thickeners',
           description: 'Stabilizers and thickeners for bakery applications',
-          image: 'assets/images/stabilizers_thickeners.png',
+          image: 'assets/images/optimized/stabilizers_thickeners.webp',
           items: [
             'Xanthan gum',
             'Guar gum',
@@ -786,7 +786,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Bakery Flavours',
           description: 'Flavors for bakery applications',
-          image: 'assets/images/bakery_flavours.png',
+          image: 'assets/images/optimized/bakery_flavours.webp',
           items: [
             'Garlic Bread',
             "Ajwain Flavour",
@@ -814,7 +814,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Bakery Colours',
           description: 'Colours for bakery applications',
-          image: 'assets/images/bakery_colours.png',
+          image: 'assets/images/optimized/bakery_colours.webp',
           items: [
             'Tartrazine (INS 102 / E102) – Lemon yellow',
             'Sunset Yellow FCF (INS 110 / E110) – Orange-yellow',
@@ -832,7 +832,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Cocoa Powder for Bakery',
           description: 'Cocoa powder for bakery applications',
-          image: 'assets/images/bakery_colours.jpeg',
+          image: 'assets/images/optimized/Cocoa Powder for Bakery.webp',
           items: [
             'Regular Cocoa Powder',
             'Dark Cocoa Powder'
@@ -842,12 +842,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Confectionery Ingredients/Additives': {
       description: 'Confectionery ingredients and additives for candy and sweet products.',
-      image: 'assets/images/confectionery_ingredients.jpeg',
+      image: 'assets/images/optimized/confectionery_ingredients.webp',
       subItems: [
         {
           label: 'Sweeteners (Provide Sweetness & Bulk)',
           description: 'Sweeteners & Sugar Alternatives for Confectionery',
-          image: 'assets/images/Sweeteners.png',
+          image: 'assets/images/optimized/Sweeteners.webp',
           items: [
             'Fructose syrup / HFCS',
             'Sugar substitutes - sorbitol, maltitol, FOS'
@@ -856,7 +856,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Humectants (Moisture Retention, Softness)',
           description: 'Humectants for Moisture Retention & Softness in Confectionery: Natural & Synthetic Options for Texture Enhancement and Shelf-Life Extension',
-          image: 'assets/images/Humectants.png',
+          image: 'assets/images/optimized/Humectants.webp',
           items: [
             'Glycerol (glycerin)',
             'Sorbitol',
@@ -867,7 +867,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Gelling / Structuring Agents (Texture Formation) ',
           description: 'Gelling Agents for Texture Formation in Confectionery: Natural & Synthetic Options for Gelling, Thickening, and Stabilizing Candy and Sweet Products',
-          image: 'assets/images/Gelling.png',
+          image: 'assets/images/optimized/Gelling.webp',
           items: [
             'Pectin',
             'Carrageenan'
@@ -876,7 +876,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Emulsifiers (Mixing Fat + Water)',
           description: 'Emulsifiers for Stability & Texture in Confectionery: Natural & Synthetic Options for Mixing Fat and Water, Texture Enhancement, and Shelf-Life Extension',
-          image: 'assets/images/Emulsifiers_mix.png',
+          image: 'assets/images/optimized/Emulsifiers_mix.webp',
           items: [
             'Lecithin',
             'Mono & diglycerides (E471)',
@@ -886,7 +886,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Acidity Regulators (Taste Balance, pH Control)',
           description: 'Natural Acidity Regulators for Taste & pH Control in Confectionery',
-          image: 'assets/images/Acidity_Regulators.png',
+          image: 'assets/images/optimized/Acidity_Regulators.webp',
           items: [
             'Malic acid ',
             'Tartaric acid ',
@@ -897,7 +897,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Confectionery Flavours',
           description: 'Premium Flavours for Chocolates, Candies, Toffees, Chewing Gums, Jellies, Marshmallows, Caramels, Dairy‑based Sweets, Baked Confectionery, Pan Masala & Indian Sweets.',
-          image: 'assets/images/Flavours_test_aroma.jpeg',
+          image: 'assets/images/optimized/Flavours_test_aroma.webp',
           items: [
             'Alphanso Mango',
             'Apple',
@@ -925,7 +925,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Colours',
           description: 'Colours solutions for confectionery applications',
-          image: 'assets/images/bakery_colours_applications.png',
+          image: 'assets/images/optimized/bakery_colours_applications.webp',
           items: [
             'Tartrazine (INS 102 / E102) – Lemon yellow',
             'Sunset Yellow FCF (INS 110 / E110) – Orange-yellow',
@@ -939,7 +939,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Preservatives (Shelf-Life Extension)',
           description: 'Preservatives for Extended Shelf-Life in Confectionery',
-          image: 'assets/images/Preservatives (Shelf-Life Extension).png',
+          image: 'assets/images/optimized/Preservatives (Shelf-Life Extension).webp',
           items: [
             'Potassium sorbate',
             'Sodium benzoate'
@@ -948,7 +948,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Anti-Crystallization Agents (Texture Control)',
           description: 'Anti-Crystallization Agents for Texture Control in Confectionery: Natural & Synthetic Options for Preventing Sugar Crystallization and Maintaining Desired Texture in Candy and Sweet Products',
-          image: 'assets/images/Anti_Crystallization_Agents.png',
+          image: 'assets/images/optimized/Anti_Crystallization_Agents.webp',
           items: [
             'Glucose syrup',
             'Invert sugar'
@@ -957,7 +957,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Anti-Caking Agents (Flow Improvement)',
           description: 'Anti-Caking Agents for Flow Improvement in Confectionery',
-          image: 'assets/images/Anti_Caking_Agents.png',
+          image: 'assets/images/optimized/Anti_Caking_Agents.webp',
           items: [
             'Silicon dioxide',
             'Calcium silicate'
@@ -967,12 +967,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Dairy Product Ingredients/Additives': {
       description: 'Dairy product ingredients and additives for different dairy applications.',
-      image: 'assets/images/dairy_ingredients.jpeg',
+      image: 'assets/images/optimized/dairy_ingredients.webp',
       subItems: [
         {
           label: 'Sweeteners (Sweetness & Energy)',
           description: 'Sweeteners & Sugar Alternatives for Dairy Products: Natural & Artificial Options for Taste, Energy, and Texture in Dairy Applications',
-          image: 'assets/images/Sweeteners_(Sweetness & Energy).png',
+          image: 'assets/images/optimized/Sweeteners (Sweetness & Energy).webp',
           items: [
             'Fructose / HFCS',
             'Artificial sweeteners (sucralose, aspartame)',
@@ -982,7 +982,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Stabilizers & Thickeners (Texture, Mouthfeel, Stability)',
           description: 'Stabilizers & Thickeners for Texture, Mouthfeel, and Stability in Dairy Products. For Creaminess Viscosity, and Shelf-Life Extension',
-          image: 'assets/images/stabilizers_thickeners2.png',
+          image: 'assets/images/optimized/stabilizers_thickeners2.webp',
           items: [
             'Carrageenan',
             'Guar gum',
@@ -994,7 +994,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Emulsifiers (Fat Dispersion & Creaminess)',
           description: 'Emulsifiers for Stability & Creaminess in Dairy Products: Natural & Synthetic Options for Fat Dispersion, Texture Enhancement, and Shelf-Life Extension',
-          image: 'assets/images/Emulsifiers1.png',
+          image: 'assets/images/optimized/Emulsifiers1.webp',
           items: [
             'Mono & diglycerides (E471)',
             'Lecithin',
@@ -1004,7 +1004,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Dairy Flavours',
           description: 'Premium Flavours & Natural Extracts for Dairy Applications',
-          image: 'assets/images/Flavours_Dairy.png',
+          image: 'assets/images/optimized/Flavours_Dairy.webp',
           items: [
             'Almond',
             'Basundi',
@@ -1027,7 +1027,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Colours (Appearance)',
           description: 'Colours for Dairy Applications',
-          image: 'assets/images/Colours_(Appearance).png',
+          image: 'assets/images/optimized/Colours_(Appearance).webp',
           items: [
             'Tartrazine (INS 102 / E102) – Lemon yellow',
             'Sunset Yellow FCF (INS 110 / E110) – Orange-yellow',
@@ -1039,7 +1039,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Fortification Ingredients (Nutrition Enhancement)',
           description: 'Fortification Ingredients for Nutrition Enhancement in Dairy Product Applications',
-          image: 'assets/images/Fortification_Ingredients.png',
+          image: 'assets/images/optimized/Fortification_Ingredients.webp',
           items: [
             'Vitamins (A, D, B-complex)',
             'Minerals (calcium, iron)'
@@ -1048,7 +1048,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Anti-Caking Agents (Flowability in Powders)',
           description: 'Anti-Caking Agents for Flow Improvement in Powdered Dairy Products',
-          image: 'assets/images/Anti_Caking_Agents1.png',
+          image: 'assets/images/optimized/Anti_Caking_Agents1.webp',
           items: [
             'Silicon dioxide',
             'Calcium silicate'
@@ -1058,12 +1058,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Beverage Ingredients/Additives - A.Carbonated Soft Drink (CSD)': {
       description: 'Beverage ingredients and additives for carbonated soft drink formulations.',
-      image: 'assets/images/beverage_ingredients.jpeg',
+      image: 'assets/images/optimized/beverage_ingredients.webp',
       subItems: [
         {
           label: 'Sweeteners (Sweetness & Body)',
           description: 'Artificial Sweeteners for Taste & Balance in Carbonated Soft Drinks',
-          image: 'assets/images/Sweeteners_Carbonated.png',
+          image: 'assets/images/optimized/Sweeteners_Carbonated.webp',
           items: [
             'Aspartame',
             'Sucralose',
@@ -1076,7 +1076,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Acidulants (Taste & pH Control)',
           description: 'Natural Acidulants for Taste & pH Control in Carbonated Soft Drinks',
-          image: 'assets/images/Acidulants_Carbonated.png',
+          image: 'assets/images/optimized/Acidulants_Carbonated.webp',
           items: [
             'Malic acid ',
             'Sodium citrate (buffering agent)'
@@ -1085,7 +1085,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Flavours & Flavour Emulsions (CSD Application)',
           description: 'Flavours & Flavour Emulsions for Carbonated Soft Drinks: Natural, Nature-Identical & Artificial Flavour Systems for Taste Enhancement in CSD Applications',
-          image: 'assets/images/Flavours_carbonated.png',
+          image: 'assets/images/optimized/Flavours_carbonated.webp',
           items: [
             'Lahori Jeera',
             "Cloudifier White Mist Emulsion",
@@ -1105,7 +1105,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Preservatives (Shelf-Life)',
           description: 'Preservatives for Shelf-Life Extension in Carbonated Soft Drinks',
-          image: 'assets/images/Preservatives_Carbonated.png',
+          image: 'assets/images/optimized/Preservatives_Carbonated.webp',
           items: [
             'Sodium benzoate ',
             'Potassium sorbate '
@@ -1114,7 +1114,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Antioxidants (Prevent Oxidation)',
           description: 'Antioxidants for Oxidation Prevention in Carbonated Soft Drinks',
-          image: 'assets/images/Antioxidants_Carbonated.png',
+          image: 'assets/images/optimized/Antioxidants_Carbonated.webp',
           items: [
             'Ascorbic acid (Vitamin C) '
           ]
@@ -1122,7 +1122,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Functional Additives (Energy Drinks / Health Positioning)',
           description: 'Functional Additives for Energy Drinks & Health Positioning in Carbonated Soft Drinks',
-          image: 'assets/images/Functional_Carbonated.png',
+          image: 'assets/images/optimized/Functional_Carbonated.webp',
           items: [
             'Energy Drink Premix with Taurine, Glucoronolactone, Inositol, Caffeine and Vitamin B Blend',
             'Vitamin Premix (B-complex, Vitamin C, etc.)',
@@ -1132,7 +1132,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Colours (Appearance)',
           description: 'Vibrant & Stable Food Colours for Carbonated Soft Drinks',
-          image: 'assets/images/Beverage_Colours_Carbonated.png',
+          image: 'assets/images/optimized/Beverage_Colours_Carbonated.webp',
           items: [
             'Tartrazine (INS 102 / E102) – Lemon yellow',
             'Sunset Yellow FCF (INS 110 / E110) – Orange-yellow',
@@ -1153,12 +1153,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Beverage Ingredients/Additives - B.Fruit Based Beverage': {
       description: 'Beverage ingredients and additives for fruit-based RTD beverages.',
-      image: 'assets/images/beverage_ingredients.jpeg',
+      image: 'assets/images/optimized/beverage_ingredients.webp',
       subItems: [
         {
           label: 'Sweeteners (Sweetness & Mouthfeel)',
           description: 'Sweeteners for fruit-based beverages',
-          image: 'assets/images/Sweeteners_fruitBased.png',
+          image: 'assets/images/optimized/Sweeteners_fruitBased.webp',
           items: [
             'Low-calorie synthetic sweeteners - Sucralose, Aspartame, Acesulfame K,, Saccharine ',
             'Natural Sweetener - Stevia'
@@ -1168,7 +1168,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Acidulants (Taste & pH Control)',
           description: 'pH Control & Flavour Enhancers for Fruit-Based Beverages',
-          image: 'assets/images/Acidulants_fruitBased.png',
+          image: 'assets/images/optimized/Acidulants_fruitBased.webp',
           items: [
             'Malic acid ',
             'Sodium citrate (buffering agent)'
@@ -1177,7 +1177,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Flavours (Taste Enhancement)',
           description: 'Flavours for Fruit-Based Beverages: Natural, Nature-Identical & Artificial Flavour Systems for Taste Enhancement in Fruit-Based Beverage Applications',
-          image: 'assets/images/Flavours_fruitBased.png',
+          image: 'assets/images/optimized/Flavours_fruitBased.webp',
           items: [
 
             'Mixed Fruit',
@@ -1214,7 +1214,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Stabilizers & Thickeners (Texture & Stability)',
           description: 'Stabilizers & Thickeners for Texture & Stability in Fruit-Based Beverages',
-          image: 'assets/images/Stabilizers_Thickener_fruitBased.png',
+          image: 'assets/images/optimized/Stabilizers_Thickener_fruitBased.webp',
           items: [
             'Pectin',
             'CMC (Carboxymethyl cellulose) ',
@@ -1226,7 +1226,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Clouding Agents (Juice-like Appearance)',
           description: 'Clouding Agents for Juice-like Appearance in Fruit-Based Beverages',
-          image: 'assets/images/Clouding_Agents_fruitbased.png',
+          image: 'assets/images/optimized/Clouding_Agents_fruitbased.webp',
           items: [
             'Citrus oil emulsions',
             'Cloudifier Mist'
@@ -1235,7 +1235,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Preservatives (Shelf-Life)',
           description: 'Preservatives for Shelf-Life Extension in Fruit-Based Beverages',
-          image: 'assets/images/Preservatives_fruitBased1.png',
+          image: 'assets/images/optimized/Preservatives_fruitBased1.webp',
           items: [
             'Sodium benzoate ',
             'Potassium sorbate '
@@ -1244,7 +1244,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Antioxidants (Prevent Oxidation & Browning)',
           description: 'Antioxidants for Oxidation Prevention in Fruit-Based Beverages',
-          image: 'assets/images/Antioxidants_fruitBased.png',
+          image: 'assets/images/optimized/Antioxidants_fruitBased.webp',
           items: [
             'Ascorbic acid (Vitamin C) '
           ]
@@ -1252,7 +1252,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Fortification Ingredients (Nutrition Enhancement)',
           description: 'Fortification ingredients for nutrition enhancement in fruit-based beverages',
-          image: 'assets/images/Fortification_Ingredients_Fruitbased.png',
+          image: 'assets/images/optimized/Fortification_Ingredients_Fruitbased.webp',
           items: [
             'Vitamins - A, C, D, B-complex',
             'Minerals - calcium, iron, zinc',
@@ -1262,7 +1262,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Colours (Visual Appeal)',
           description: 'Vibrant & Stable Food Colours for Fruit-Based Beverages',
-          image: 'assets/images/colours_fruitBased.png',
+          image: 'assets/images/optimized/colours_fruitBased.webp',
           items: [
             'Tartrazine (INS 102 / E102) – Lemon yellow',
             'Sunset Yellow FCF (INS 110 / E110) – Orange-yellow',
@@ -1282,12 +1282,12 @@ export class ProductsComponent implements OnInit, OnDestroy {
     },
     'Seasoning Ingredients/Additives': {
       description: 'Functional specialty ingredients for seasoning systems and additives.',
-      image: 'assets/images/seasoning_ingredients.jpeg',
+      image: 'assets/images/optimized/seasoning_ingredients.webp',
       subItems: [
         {
           label: 'Sugars and Fillers',
           description: 'Functional Sugars & Bulk Fillers for Seasoning Systems',
-          image: 'assets/images/Sugar_Fillers.png',
+          image: 'assets/images/optimized/Sugar_Fillers.webp',
           items: [
             'Dextrose',
             'Lactose',
@@ -1297,7 +1297,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Flavour Enhancers (Umami & Taste Boost)',
           description: 'Flavour Enhancers for Seasoning Systems',
-          image: 'assets/images/Flavour_Enhancers.png',
+          image: 'assets/images/optimized/Flavour_Enhancers.webp',
           items: [
             'Monosodium glutamate (MSG)',
             'Disodium inosinate (IMP)',
@@ -1309,7 +1309,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Flavouring Agents & Savoury Top Notes',
           description: 'Flavouring Agents & Savoury Top Notes for Seasoning Systems',
-          image: 'assets/images/Flavouring_Agents.png',
+          image: 'assets/images/optimized/Flavouring_Agents.webp',
           items: [
             'Achari',
             'Aloo Chat',
@@ -1357,7 +1357,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Dairy-Based Ingredients (Creamy / Cheesy Notes)',
           description: 'Dairy-based ingredients for adding creamy and cheesy notes to foods',
-          image: 'assets/images/Dairy_Based_Ingredients.png',
+          image: 'assets/images/optimized/Dairy_Based_Ingredients.webp',
           items: [
             'Cheese powder',
             'Whey powder',
@@ -1368,7 +1368,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Acidulants (Tanginess & Balance)',
           description: '“Tanginess & pH Control Solutions for Seasoning Systems',
-          image: 'assets/images/Acidulants.png',
+          image: 'assets/images/optimized/Acidulants.webp',
           items: [
             'Malic acid',
             'Acetic acid '
@@ -1377,7 +1377,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Bulking Agents / Carriers (Volume & Dispersion)',
           description: 'Bulking Agents for Seasoning Systems',
-          image: 'assets/images/Bulking_Agents.png',
+          image: 'assets/images/optimized/Bulking_Agents.webp',
           items: [
             'Maltodextrin',
             'Starch',
@@ -1387,7 +1387,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Anti-Caking Agents (Free Flowing Powder)',
           description: 'Anti-Caking Agents for Seasoning Systems',
-          image: 'assets/images/Anti_Caking.png',
+          image: 'assets/images/optimized/Anti_Caking.webp',
           items: [
             'Silicon dioxide',
             'Calcium silicate',
@@ -1397,7 +1397,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Colours (Visual Appeal)',
           description: 'Vibrant Natural Pigments Collection for Food Applications',
-          image: 'assets/images/Colours_(Visual Appeal).png',
+          image: 'assets/images/optimized/Colours_(Visual Appeal).webp',
           items: [
             "paprika extract",
             "turmeric extract",
@@ -1419,7 +1419,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Functional Additives (Advanced Seasonings)',
           description: 'Functional Additives for Advanced Seasoning Solutions',
-          image: 'assets/images/Functional_Additives.png',
+          image: 'assets/images/optimized/Functional_Additives.webp',
           items: [
             'Encapsulated flavours',
             'Smoke flavour',
@@ -1436,7 +1436,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Food Colours',
           description: 'Artificial and Natural Colours for Food Applications',
-          image: 'assets/images/colours.png',
+          image: 'assets/images/optimized/colours.webp',
           items: [
             'Artifial Colours (Synthetic)',
              'Tartrazine (INS 102 / E102) – Lemon yellow',
@@ -1885,7 +1885,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   // getSubItemImage(): string {
   //   if (this.selectedSubItem === 'Snacks') {
-  //     return 'assets/images/extruded_snack.jpeg'; // 👈 PUT YOUR IMAGE HERE
+  //     return 'assets/images/optimized/extruded_snack.webp'; // 👈 PUT YOUR IMAGE HERE
   //   }
   //   return 'assets/images/default.jpg';
   // }
