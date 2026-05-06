@@ -1,0 +1,9 @@
+﻿node_modules
+dist
+.angular
+logs
+.git
+.vscode
+*.log
+npm-debug.log
+yarn-error.log
