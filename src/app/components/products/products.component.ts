@@ -1287,7 +1287,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         {
           label: 'Sugars and Fillers',
           description: 'Functional Sugars & Bulk Fillers for Seasoning Systems',
-          image: 'assets/images/optimized/Sugar_Fillers.webp',
+          image: 'assets/images/optimized/Sugar_Fillers.webp', 
           items: [
             'Dextrose',
             'Lactose',
