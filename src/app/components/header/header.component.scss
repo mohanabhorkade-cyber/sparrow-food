@@ -134,8 +134,8 @@ $white:        #ffffff;
     height: 62px;
     // flex-wrap: wrap;
     position: relative;
-    padding-top: 30px;
-    padding-bottom: 30px;
+     padding-top: 0;       // ← removed the extra padding causing height issues
+    padding-bottom: 0;
   }
 
   .navbar-toggle {
@@ -176,7 +176,7 @@ $white:        #ffffff;
      height: 95px;
     // margin-right: 0;
     // padding-bottom: 30px;
-    margin-right: 10rem;
+    margin-right: 0rem;
   }
 }
 
