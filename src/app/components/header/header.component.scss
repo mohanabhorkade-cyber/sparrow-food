@@ -50,10 +50,12 @@ $white:        #ffffff;
   // max-width: 180px;
   // object-fit: contain;
   // display: block;
-   height: 100px;
+  height: 100px;
   width: auto;
   max-width: 160px;
-  margin-right: 0;  // ← Remove fixed margin
+  margin-right: 0;   // ← no margin, space-between handles the gap
+  object-fit: contain;
+  display: block;
   
 }
 
@@ -130,8 +132,10 @@ $white:        #ffffff;
 
   .navbar-container {
     height: 62px;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 
   .navbar-toggle {
@@ -143,7 +147,7 @@ $white:        #ffffff;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2px;
+    gap: 14px;
     background: color.adjust($brand-dark, $lightness: 5%);
     padding: 0.8rem 1rem;
     border-top: 1px solid rgba($white, 0.08);
@@ -169,8 +173,10 @@ $white:        #ffffff;
   }
 
   .navbar-logo {
-     height: 80px;
-    margin-right: 0;
+     height: 95px;
+    // margin-right: 0;
+    // padding-bottom: 30px;
+    margin-right: 10rem;
   }
 }
 
