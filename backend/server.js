@@ -41,7 +41,7 @@ normalizeEnv();
 
 const contactEmail = process.env.CONTACT_EMAIL;
 const resendApiKey = process.env.EMAIL_API_KEY;
-const emailSender = 'Sparrow Food <onboarding@resend.dev>';
+const emailSender = 'Sparrow Food <admin@sparrowfood.com>';
 console.log("API KEY exists:", !!process.env.EMAIL_API_KEY);
 console.log("CONTACT_EMAIL:", process.env.CONTACT_EMAIL);
 
