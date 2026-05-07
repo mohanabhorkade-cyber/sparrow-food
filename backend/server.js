@@ -10,8 +10,13 @@ const winston = require('winston');
 const Joi = require('joi');
 const validator = require('validator');
 const path = require('path');
+const fs = require('fs');
 
 require('dotenv').config({ path: path.join(__dirname, '.env') });
+
+if (!fs.existsSync('logs')) {
+  fs.mkdirSync('logs');
+}
 
 // Winston Logger Configuration
 const logger = winston.createLogger({
@@ -471,10 +476,19 @@ app.use('*', (req, res) => {
 // Error Handler (must be last)
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
-const server = app.listen(PORT, HOST, () => {
-  logger.info(`Backend server running on ${HOST}:${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+// const PORT = process.env.PORT || 5000;
+// const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+// const server = app.listen(PORT, HOST, () => {
+//   logger.info(`Backend server running on ${HOST}:${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+// });
+const PORT = process.env.PORT || 3000;
+
+const server = app.listen(PORT, '0.0.0.0', () => {
+  logger.info(
+    `🚀 Backend server running on port ${PORT} in ${
+      process.env.NODE_ENV || 'development'
+    } mode`
+  );
 });
 
 // Graceful shutdown
