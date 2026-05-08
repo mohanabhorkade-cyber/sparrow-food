@@ -484,7 +484,7 @@ app.use(errorHandler);
 // const server = app.listen(PORT, HOST, () => {
 //   logger.info(`Backend server running on ${HOST}:${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
 // });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 const server = app.listen(PORT, '0.0.0.0', () => {
   logger.info(
