@@ -12,15 +12,15 @@ npm install
 ### 2. Configure Environment Variables
 Create a `.env` file in the backend folder with:
 ```
-EMAIL_API_KEY=your-sendgrid-api-key
+EMAIL_API_KEY=your-resend-api-key
 CONTACT_EMAIL=contact@sparrowfood.com
 PORT=5000
 ```
 
-### 3. SendGrid Setup
-- Create a SendGrid account
+### 3. Resend Setup
+- Create a Resend account
 - Add and verify your sender email address or domain
-- Create an API key with `Mail Send` permissions
+- Create an API key
 - Use that key in `.env` as `EMAIL_API_KEY`
 
 ### 4. Start the Backend

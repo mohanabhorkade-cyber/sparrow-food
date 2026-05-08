@@ -10,3 +10,11 @@ services:
         value: production
       - key: PORT
         value: 5000
+      - key: EMAIL_API_KEY
+        value: "${EMAIL_API_KEY}"
+      - key: CONTACT_EMAIL
+        value: "${CONTACT_EMAIL}"
+      - key: ALLOWED_ORIGINS
+        value: "https://sparrowfood.com,https://www.sparrowfood.com"
+      - key: LOG_LEVEL
+        value: info

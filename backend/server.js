@@ -89,15 +89,32 @@ app.use(helmet({
 
 // CORS Configuration
 const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(',')
-  : ['http://localhost:4200'];
+  ? process.env.ALLOWED_ORIGINS.split(',').map(origin => origin.trim()).filter(Boolean)
+  : ['http://localhost:4200', 'https://sparrowfood.com', 'https://www.sparrowfood.com'];
+
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const isOriginAllowed = (origin) => {
+  if (!origin) return true;
+  return allowedOrigins.some((allowed) => {
+    if (allowed === origin) {
+      return true;
+    }
+    if (allowed.includes('*')) {
+      const pattern = '^' + allowed.split('*').map(escapeRegExp).join('.*') + '$';
+      return new RegExp(pattern).test(origin);
+    }
+    return false;
+  });
+};
+
+logger.info('Allowed CORS origins', { allowedOrigins });
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, etc.)
+    // Allow requests with no origin (mobile apps, server-side requests, etc.)
     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    if (isOriginAllowed(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -484,7 +501,7 @@ app.use(errorHandler);
 // const server = app.listen(PORT, HOST, () => {
 //   logger.info(`Backend server running on ${HOST}:${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
 // });
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, '0.0.0.0', () => {
   logger.info(
