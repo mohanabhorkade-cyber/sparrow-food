@@ -26,7 +26,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets",
+                "src/assets",
+              
               {
                 "glob": "**/*",
                 "input": "public"
@@ -61,8 +62,7 @@
                 "styles": {
                   "minify": true,
                   "inlineCritical": true
-                },
-                "fonts": true
+                }
               },
               "sourceMap": false,
               "namedChunks": false,
@@ -105,14 +105,7 @@
           "configurations": {
             "production": {
               "sourceMap": false,
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": false
-                },
-                "fonts": true
-              }
+              "optimization": true
             },
             "development": {
               "sourceMap": true,

@@ -487,6 +487,12 @@ app.get('/health', (req, res) => {
   res.json(healthCheck);
 });
 
+const distPath = path.join(__dirname, 'dist/sparrow-food/browser');
+app.use(express.static(distPath));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
 // 404 Handler
 app.use('*', (req, res) => {
   logger.warn('404 - Route not found:', req.originalUrl);
