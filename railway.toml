@@ -1,8 +1,8 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm install && npm run build:ssr"
+buildCommand = "npm ci --omit=dev && npm run build:prod"
 
 [deploy]
-startCommand = "node --max-old-space-size=2048 dist/sparrow-food/server/main.js"
+startCommand = "node server.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
