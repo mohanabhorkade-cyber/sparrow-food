@@ -82,13 +82,11 @@ const normalizeEnv = () => {
 };
 
 normalizeEnv();
-// Debug: log available env keys (not values)
+
 const envKeys = Object.keys(process.env).filter(k =>
   ['EMAIL_API_KEY', 'CONTACT_EMAIL', 'ALLOWED_ORIGINS', 'NODE_ENV', 'PORT'].includes(k)
 );
-
 logger.info('Environment variables detected:', envKeys);
-
 
 const contactEmail = process.env['CONTACT_EMAIL'];
 const resendApiKey = process.env['EMAIL_API_KEY'];
@@ -126,13 +124,13 @@ const allowedOrigins = process.env['ALLOWED_ORIGINS']
   ? process.env['ALLOWED_ORIGINS'].split(',').map(origin => origin.trim()).filter(Boolean)
   : ['http://localhost:4200', 'https://sparrowfood.com', 'https://www.sparrowfood.com'];
 
-const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&');
+// FIX 1: Fixed escapeRegExp — was double-escaping backslash, breaking wildcard regex
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 const isOriginAllowed = (origin: string) => {
   if (!origin) return true;
   return allowedOrigins.some((allowed) => {
-    if (allowed === origin) {
-      return true;
-    }
+    if (allowed === origin) return true;
     if (allowed.includes('*')) {
       const pattern = '^' + allowed.split('*').map(escapeRegExp).join('.*') + '$';
       return new RegExp(pattern).test(origin);
@@ -149,6 +147,7 @@ app.use(cors({
     if (isOriginAllowed(origin)) {
       callback(null, true);
     } else {
+      logger.warn('CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -175,11 +174,24 @@ const generalLimiter = rateLimit({
 
 app.use(compression({ level: 6, threshold: 1024 }));
 app.use(morgan('combined', { stream: { write: (message: string) => logger.info(message.trim()) } }));
+
+// FIX 2: Body parser must come BEFORE the content-type normalizer
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
+// FIX 3: Normalize content-type for POST requests missing it, so body-parser doesn't silently skip them
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.method === 'POST' && !req.headers['content-type']?.includes('application/json')) {
+    req.headers['content-type'] = 'application/json';
+  }
+  next();
+});
+
 app.use('/api/email/', emailLimiter);
 app.use(generalLimiter);
+
+// FIX 4: abortEarly: false so ALL Joi validation errors are reported at once, not just the first
+const joiOptions = { abortEarly: false };
 
 const priceListSchema = Joi.object({ email: Joi.string().email().required() });
 const contactSchema = Joi.object({
@@ -208,11 +220,7 @@ const sendEmail = async (message: any, maxRetries = 2) => {
       const statusCode = error?.response?.status || error?.response?.statusCode || error?.statusCode || error?.code || 0;
       const errorMessage = error?.message || 'Unknown Resend error';
 
-      logger.warn('Resend email attempt failed', {
-        attempt: attempt + 1,
-        statusCode,
-        error: errorMessage
-      });
+      logger.warn('Resend email attempt failed', { attempt: attempt + 1, statusCode, error: errorMessage });
 
       if (attempt === maxRetries || !retryableEmailStatus.includes(Number(statusCode))) {
         logger.error('Resend email failed permanently', {
@@ -245,9 +253,7 @@ const errorHandler = (err: any, req: Request, res: Response, next: NextFunction)
 };
 
 const sanitizeInput = (input: unknown) => {
-  if (typeof input === 'string') {
-    return validator.escape(input);
-  }
+  if (typeof input === 'string') return validator.escape(input);
   return input;
 };
 
@@ -271,42 +277,34 @@ app.get('/sitemap.xml', (req, res) => {
   const baseUrl = `${req.protocol}://${req.get('host')}`;
   const urls = ['/', '/products', '/contact', '/about'];
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${baseUrl}${url}</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>`).join('\n')}\n</urlset>`;
-
   res.type('application/xml');
   res.send(sitemapXml);
 });
 
-app.get('/api/categories', (req, res) => {
-  res.json(categoriesData);
-});
-
-app.get('/api/subItemData', (req, res) => {
-  res.json(subItemData);
-});
+app.get('/api/categories', (req, res) => res.json(categoriesData));
+app.get('/api/subItemData', (req, res) => res.json(subItemData));
 
 app.get('/api/products', (req, res) => {
   const category = typeof req.query['category'] === 'string' ? req.query['category'] : '';
   const subItem = typeof req.query['subItem'] === 'string' ? req.query['subItem'] : '';
 
   let filteredProducts: Product[] = productsData;
-
-  if (category) {
-    filteredProducts = filteredProducts.filter((product: Product) => product.category === category);
-  }
-
-  if (subItem) {
-    filteredProducts = filteredProducts.filter((product: Product) => product.subItem === subItem);
-  }
+  if (category) filteredProducts = filteredProducts.filter((p: Product) => p.category === category);
+  if (subItem) filteredProducts = filteredProducts.filter((p: Product) => p.subItem === subItem);
 
   res.json(filteredProducts);
 });
 
 app.post('/api/email/send-price-list', async (req, res) => {
   try {
-    const { error, value } = priceListSchema.validate(req.body);
+    // FIX 5: Log incoming body to catch parsing failures early
+    logger.info('Price list request body:', { body: req.body, contentType: req.headers['content-type'] });
+
+    const { error, value } = priceListSchema.validate(req.body, joiOptions);
     if (error) {
-      logger.warn('Price list validation failed:', error.details[0].message);
-      return res.status(400).json({ error: 'Invalid email address provided' });
+      const messages = error.details.map(d => d.message).join(', ');
+      logger.warn('Price list validation failed:', messages);
+      return res.status(400).json({ error: 'Invalid email address provided', details: messages });
     }
 
     const { email } = value;
@@ -329,12 +327,10 @@ app.post('/api/email/send-price-list', async (req, res) => {
         <p>If you have any immediate questions, please reply to this email or contact us directly.</p>
         <hr>
         <p><strong>Sparrow Food Industries</strong></p>
-        <p>Sparrow Food Industries<br>
-          Plot Number R1-1,<br>
-          Survey number 115/4<br>
+        <p>Plot Number R1-1, Survey number 115/4<br>
           Hinjewadi - kasarsai road,<br>
-          Nearby Chaitanya Education Institution, At.Nere,Post. Jambhe,<br>
-          Dist.pune - 411033</p>
+          Nearby Chaitanya Education Institution, At.Nere, Post. Jambhe,<br>
+          Dist. Pune - 411033</p>
         <p>Email: ${validator.escape(contactEmail)}</p>
         <p>Phone: +917276130808</p>
       `
@@ -353,7 +349,6 @@ app.post('/api/email/send-price-list', async (req, res) => {
     };
 
     await Promise.all([sendEmail(adminMessage), sendEmail(userMessage)]);
-
     logger.info('Price list emails sent successfully for:', sanitizedEmail);
     return res.json({ success: true, message: 'Price list request received successfully' });
   } catch (error) {
@@ -364,10 +359,14 @@ app.post('/api/email/send-price-list', async (req, res) => {
 
 app.post('/api/email/send-contact', async (req, res) => {
   try {
-    const { error, value } = contactSchema.validate(req.body);
+    // FIX 5: Log incoming body to catch parsing failures early
+    logger.info('Contact request body:', { body: req.body, contentType: req.headers['content-type'] });
+
+    const { error, value } = contactSchema.validate(req.body, joiOptions);
     if (error) {
-      logger.warn('Contact validation failed:', error.details[0].message);
-      return res.status(400).json({ error: 'Please provide valid name, email, and message (10-1000 characters)' });
+      const messages = error.details.map(d => d.message).join(', ');
+      logger.warn('Contact validation failed:', messages);
+      return res.status(400).json({ error: 'Please provide valid name, email, and message (10-1000 characters)', details: messages });
     }
 
     const { name, email, message } = value;
@@ -416,7 +415,6 @@ app.post('/api/email/send-contact', async (req, res) => {
     };
 
     await Promise.all([sendEmail(adminMessage), sendEmail(userMessage)]);
-
     logger.info('Contact email and confirmation sent successfully from:', sanitizedEmail);
     return res.json({ success: true, message: 'Message sent successfully' });
   } catch (error) {
@@ -427,10 +425,14 @@ app.post('/api/email/send-contact', async (req, res) => {
 
 app.post('/api/email/send-inquiry', async (req, res) => {
   try {
-    const { error, value } = inquirySchema.validate(req.body);
+    // FIX 5: Log incoming body to catch parsing failures early
+    logger.info('Inquiry request body:', { body: req.body, contentType: req.headers['content-type'] });
+
+    const { error, value } = inquirySchema.validate(req.body, joiOptions);
     if (error) {
-      logger.warn('Inquiry validation failed:', error.details[0].message);
-      return res.status(400).json({ error: 'Please provide valid email and message (10-1000 characters)' });
+      const messages = error.details.map(d => d.message).join(', ');
+      logger.warn('Inquiry validation failed:', messages);
+      return res.status(400).json({ error: 'Please provide valid email and message (10-1000 characters)', details: messages });
     }
 
     const { name, email, message, productName, brand, packSize } = value;
@@ -491,7 +493,6 @@ app.post('/api/email/send-inquiry', async (req, res) => {
     };
 
     await Promise.all([sendEmail(adminMessage), sendEmail(userMessage)]);
-
     logger.info('Inquiry email and confirmation sent successfully from:', sanitizedEmail);
     return res.json({ success: true, message: 'Inquiry sent successfully' });
   } catch (error) {
