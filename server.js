@@ -6,8 +6,9 @@ const distPath = path.join(__dirname, 'dist/sparrow-food/browser');
 app.use(express.static(distPath));
 
 // Sitemap for SEO
+// Sitemap for SEO
 app.get('/sitemap.xml', (req, res) => {
-  const baseUrl = `${req.protocol}://${req.get('host')}`;
+  const baseUrl = 'https://www.sparrowfood.com';
   const urls = ['/', '/products', '/contact', '/about'];
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
