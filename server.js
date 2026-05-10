@@ -21,7 +21,9 @@ ${urls.map(url => `  <url><loc>${baseUrl}${url}</loc><changefreq>weekly</changef
 // Robots.txt
 app.get('/robots.txt', (req, res) => {
   res.type('text/plain');
-  res.send(`User-agent: *\nAllow: /\nSitemap: ${req.protocol}://${req.get('host')}/sitemap.xml\n`);
+  // res.send(`User-agent: *\nAllow: /\nSitemap: ${req.protocol}://${req.get('host')}/sitemap.xml\n`);
+  res.send(`User-agent: *\nAllow: /\nSitemap: https://www.sparrowfood.com/sitemap.xml\n`);
+  
 });
 
 app.get('*', (req, res) => {
